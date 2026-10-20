@@ -17,6 +17,7 @@ Read the relevant supporting files for this request; do not load every module by
 - For opportunity reviews, hygiene, lead triage, forecast, and account analysis: [sales-operations.md](references/sales-operations.md).
 - For AI SDR, bulk changes, execution safeguards, and rollback: [automation-governance.md](references/automation-governance.md).
 - For customer success and expansion workflows: [customer-lifecycle.md](references/customer-lifecycle.md).
+- When deciding how a supplied source or a separate Codex capability fits: [routing-and-activation.md](references/routing-and-activation.md).
 - For proposal structure and approval gates: [proposal-and-approval.md](references/proposal-and-approval.md).
 - For diagrams and written deliverables: [documentation-and-visuals.md](references/documentation-and-visuals.md).
 - For the unchanged Kommo technical specialist handoff: [kommo-handoff.md](references/kommo-handoff.md).

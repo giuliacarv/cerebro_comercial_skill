@@ -6,7 +6,7 @@
 
 Use the orchestrator when a request crosses business process, pipeline, metrics, integrations, or automation design. It selects only the relevant internal playbook, gathers current evidence, and presents a specific plan before material changes. For a narrow Kommo read or operation, use `kommo-crm` directly.
 
-The package contains original, task-focused guidance informed by the linked references in [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md). It does not vendor the listed third-party skills or any account snapshots, CRM exports, credentials, or customer data.
+The package contains original, task-focused guidance informed by the linked references in [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md). Those URLs are research sources, not skills installed in Codex; [`routing-and-activation.md`](skills/kommo-strategic-automation-architect/references/routing-and-activation.md) explains how each source maps to an internal playbook or a real skill available in the current environment. The repository does not vendor third-party skill files or contain account snapshots, CRM exports, credentials, or customer data.
 
 ## Install in Codex
 
@@ -49,7 +49,7 @@ This image from the user is represented as a workflow: request → orchestrator 
 
 ## Design rules
 
-- Do not install 22 overlapping skills as competing global routers. Keep one discoverable orchestrator and route to focused internal references.
+- Do not install the supplied source set as competing global routers. Keep one discoverable orchestrator and route to focused internal references.
 - Reuse methods, not platform-specific commands. HubSpot CLI/workflow details do not apply to Kommo.
 - Treat thresholds, SLA values, scoring weights, and benchmarks in source material as examples until supported by this organization's own evidence.
 - Use source links for attribution and future review; no third-party skill text is included in the package.
