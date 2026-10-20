@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kommo Strategic Automation Architect"
+  short_description: "Plan evidence-based commercial workflows in Kommo"
+  default_prompt: "Use $kommo-strategic-automation-architect to turn a commercial outcome into an evidence-backed Kommo automation proposal."

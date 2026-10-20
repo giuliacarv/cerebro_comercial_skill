@@ -1,0 +1,15 @@
+# Local account data and credentials do not belong in this repository.
+.env
+.env.*
+!.env.example
+*.token
+*.pem
+*.key
+Snapshots/
+snapshots/
+exports/
+customer-data/
+__pycache__/
+*.pyc
+Thumbs.db
+desktop.ini
