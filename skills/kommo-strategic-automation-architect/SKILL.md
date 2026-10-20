@@ -14,6 +14,7 @@ Read the relevant supporting files for this request; do not load every module by
 - For company, offer, customer, or process context: [discovery-and-context.md](references/discovery-and-context.md).
 - For CRM integrations, workflow specifications, or system boundaries: [workflow-architecture.md](references/workflow-architecture.md).
 - For choosing and designing Kommo native AI agents, Salesbots, and AI suggestions: [kommo-native-automation.md](references/kommo-native-automation.md). This is the product and workflow design guide; use `kommo-crm` for account-specific implementation mechanics.
+- For detailed Kommo AI features, native AI agent setup, sources, persona, actions, testing, limits, Copilot, and AI suggestions: [agentes-ia.md](references/agentes-ia.md). The focused entrypoint is `$kommo-strategic-automation-architect-agentes-ia`; it loads this same reference without duplicating it.
 - For stages, pipeline, RevOps, and GTM metrics: [revops-and-pipeline.md](references/revops-and-pipeline.md).
 - For opportunity reviews, hygiene, lead triage, forecast, and account analysis: [sales-operations.md](references/sales-operations.md).
 - For AI SDR, bulk changes, execution safeguards, and rollback: [automation-governance.md](references/automation-governance.md).

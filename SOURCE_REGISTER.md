@@ -37,6 +37,16 @@ The user supplied this source list on 2026-10-20. The repository uses original g
 - 24 unique URLs after deduplicating item 7.
 - No third-party instruction file, credential, CRM export, customer list, or account snapshot is included.
 
+## Official Kommo product documentation
+
+The following official documentation was reviewed on 2026-10-20 for the original Portuguese synthesis in [`agentes-ia.md`](skills/kommo-strategic-automation-architect/references/agentes-ia.md):
+
+- [Kommo AI category](https://support.kommo.com/docs/pt-br/kommo-ai) and its linked AI tools: product overview, AI limits and credits, credit purchase, text rewriting, writing suggestions, suggested replies, knowledge sources, conversation summaries, task suggestions, Copilot, and Analyst mode.
+- [AI Agent category](https://support.kommo.com/resources/docs/pt-br/ai-agent-1) and its 11 articles: agent overview, automatic/manual setup, testing, management, lead qualification, customer support, after-hours conversations, bookings, voice, dashboard/use, and active-use limits.
+- Related official material: plan limits, Shopify, WooCommerce, Lazada, Nuvemshop, Google Calendar, legacy AI Power-up, and [Kommo's documentation index for LLMs](https://support.kommo.com/llms.txt).
+
+The repository links to these pages and summarizes their product behavior in original wording. It does not include a verbatim local copy of Kommo's support articles. Plan limits, feature availability, UI labels, and product behavior are changeable; verify the official pages and the target workspace before implementation.
+
 ## License handling
 
 The repository's [`LICENSE`](LICENSE) applies to the original materials in this project only. It does not override third-party license terms. This source register records attribution and whether a license was checked; it is not legal advice. Recheck each repository's current license and the individual file's terms before copying, redistributing, or adapting expressive text. The project intentionally links to the upstream sources instead of bundling their skill files.

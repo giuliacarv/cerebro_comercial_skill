@@ -1,6 +1,6 @@
 # Cerebro Comercial — Kommo
 
-`kommo-strategic-automation-architect` is a proprietary Codex skill that coordinates commercial discovery, RevOps diagnosis, workflow architecture, and approval-ready automation proposals around Kommo. It sits **above** the existing `kommo-crm` technical skill, which remains separate and unchanged.
+`kommo-strategic-automation-architect` is a proprietary Codex skill that coordinates commercial discovery, RevOps diagnosis, workflow architecture, and approval-ready automation proposals around Kommo. It sits **above** the existing `kommo-crm` technical skill, which remains separate and unchanged. A narrow companion entrypoint, `kommo-strategic-automation-architect-agentes-ia`, loads the detailed Kommo AI module directly.
 
 ## What this package is for
 
@@ -10,13 +10,21 @@ The package contains original, task-focused guidance informed by the linked refe
 
 ## Install in Codex
 
-Copy the folder `skills/kommo-strategic-automation-architect` into the global skills directory:
+Copy both skill folders into the global skills directory. The focused AI entrypoint reads the reference inside the strategic skill, so keep both folders installed together:
 
 ```powershell
-$source = 'C:\Users\Usuário\Documents\Codex\cerebro_comercial_skill\skills\kommo-strategic-automation-architect'
-$destination = 'C:\Users\Usuário\.codex\skills\kommo-strategic-automation-architect'
-if (Test-Path -LiteralPath $destination) { throw "Destination already exists: $destination" }
-Copy-Item -LiteralPath $source -Destination $destination -Recurse
+$sourceRoot = 'C:\Users\Usuário\Documents\Codex\cerebro_comercial_skill\skills'
+$destinationRoot = 'C:\Users\Usuário\.codex\skills'
+$skillNames = @(
+    'kommo-strategic-automation-architect',
+    'kommo-strategic-automation-architect-agentes-ia'
+)
+foreach ($skillName in $skillNames) {
+    $source = Join-Path $sourceRoot $skillName
+    $destination = Join-Path $destinationRoot $skillName
+    if (Test-Path -LiteralPath $destination) { throw "Destination already exists: $destination" }
+    Copy-Item -LiteralPath $source -Destination $destination -Recurse
+}
 ```
 
 Start a new conversation or refresh the skill picker if Codex has not discovered it yet. To update a later installation, compare the source and installed files first, preserve any local changes, then replace only the intended skill folder and verify the copy.
@@ -41,7 +49,9 @@ This image from the user is represented as a workflow: request → orchestrator 
 
 | Path | Purpose |
 | --- | --- |
-| `skills/kommo-strategic-automation-architect/SKILL.md` | Codex entrypoint and routing rules |
+| `skills/kommo-strategic-automation-architect/SKILL.md` | Strategic Codex entrypoint and routing rules |
+| `skills/kommo-strategic-automation-architect/references/agentes-ia.md` | Detailed Portuguese reference and source index for Kommo AI and native AI agents |
+| `skills/kommo-strategic-automation-architect-agentes-ia/SKILL.md` | Focused Codex entrypoint that loads the shared AI reference |
 | `skills/kommo-strategic-automation-architect/references/` | Focused playbooks loaded only when relevant |
 | `SOURCE_REGISTER.md` | Inventory, adaptation notes, and license/source attribution |
 | `skills/kommo-strategic-automation-architect/references/kommo-native-automation.md` | Native AI agent, Salesbot, and AI suggestion design guidance |
@@ -51,11 +61,12 @@ This image from the user is represented as a workflow: request → orchestrator 
 
 ## Design rules
 
-- Do not install the supplied source set as competing global routers. Keep one discoverable orchestrator and route to focused internal references.
+- Do not install the supplied source set as competing global routers. Keep one strategic orchestrator; the focused AI entrypoint delegates to its shared reference and does not create a second source of truth.
 - Reuse methods, not platform-specific commands. HubSpot CLI/workflow details do not apply to Kommo.
 - Treat thresholds, SLA values, scoring weights, and benchmarks in source material as examples until supported by this organization's own evidence.
 - Use source links for attribution and future review; no third-party skill text is included in the package.
 - Keep `kommo-crm` technically authoritative. This repository neither copies nor changes it.
+- The Kommo AI module is an original synthesis linked to official Kommo pages, not a verbatim mirror of their articles.
 - Keep the repository private while the skill is proprietary and under active development.
 
 ## Refreshing source material

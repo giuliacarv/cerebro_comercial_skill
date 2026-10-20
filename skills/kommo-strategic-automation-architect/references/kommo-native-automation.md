@@ -2,6 +2,8 @@
 
 Use this guide when a request involves the native Kommo AI agent, Salesbots, AI reply suggestions, AI task suggestions, or coordination between them. It helps select and design the right Kommo capability. For live account state, API/UI mechanics, and technical execution, follow the installed `kommo-crm` skill and current official Kommo documentation.
 
+For a detailed feature reference covering Kommo AI tools and the native AI agent, load [agentes-ia.md](agentes-ia.md). This guide remains the short architecture overview for selecting and combining AI agents, Salesbots, and deterministic pipeline automation.
+
 ## Select the right capability
 
 | Need | Kommo capability | Operating distinction |
