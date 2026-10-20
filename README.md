@@ -44,6 +44,8 @@ This image from the user is represented as a workflow: request → orchestrator 
 | `skills/kommo-strategic-automation-architect/SKILL.md` | Codex entrypoint and routing rules |
 | `skills/kommo-strategic-automation-architect/references/` | Focused playbooks loaded only when relevant |
 | `SOURCE_REGISTER.md` | Inventory, adaptation notes, and license/source attribution |
+| `skills/kommo-strategic-automation-architect/references/kommo-native-automation.md` | Native AI agent, Salesbot, and AI suggestion design guidance |
+| `Interface e Recursos do Kommo/Agente de IA Nativo/MAPA_RECURSOS.md` | Local screenshot index and feature map; raw PNGs remain ignored by Git |
 | `ARCHITECTURE.md` | Decision record for the separate orchestration layer |
 | `LICENSE` | Proprietary terms for this original package |
 

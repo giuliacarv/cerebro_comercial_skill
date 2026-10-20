@@ -1,6 +1,6 @@
 ---
 name: kommo-strategic-automation-architect
-description: Orchestrate discovery, RevOps diagnosis, and proposals for commercial workflows and automations in Kommo. Use when the request needs strategic analysis or cross-skill coordination; use kommo-crm directly for a narrow Kommo operation.
+description: Orchestrate commercial discovery and design Kommo workflows using native AI agents and Salesbots. Use for strategic analysis or automation architecture; use kommo-crm directly for narrow technical Kommo operations.
 ---
 
 # Kommo Strategic Automation Architect
@@ -13,6 +13,7 @@ Read the relevant supporting files for this request; do not load every module by
 
 - For company, offer, customer, or process context: [discovery-and-context.md](references/discovery-and-context.md).
 - For CRM integrations, workflow specifications, or system boundaries: [workflow-architecture.md](references/workflow-architecture.md).
+- For choosing and designing Kommo native AI agents, Salesbots, and AI suggestions: [kommo-native-automation.md](references/kommo-native-automation.md). This is the product and workflow design guide; use `kommo-crm` for account-specific implementation mechanics.
 - For stages, pipeline, RevOps, and GTM metrics: [revops-and-pipeline.md](references/revops-and-pipeline.md).
 - For opportunity reviews, hygiene, lead triage, forecast, and account analysis: [sales-operations.md](references/sales-operations.md).
 - For AI SDR, bulk changes, execution safeguards, and rollback: [automation-governance.md](references/automation-governance.md).

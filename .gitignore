@@ -9,6 +9,8 @@ Snapshots/
 snapshots/
 exports/
 customer-data/
+# Local Kommo UI evidence may contain live account, lead, and automation data.
+/Interface e Recursos do Kommo/**/*.png
 __pycache__/
 *.pyc
 Thumbs.db
