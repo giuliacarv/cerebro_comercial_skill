@@ -1,6 +1,6 @@
 ---
 name: kommo-strategic-automation-architect
-description: Orchestrate commercial discovery and design Kommo workflows using native AI agents and Salesbots. Use for strategic analysis or automation architecture; use kommo-crm directly for narrow technical Kommo operations.
+description: Route commercial requests to the smallest relevant set of discovery, RevOps, Salesbot, Kommo AI, automation, and sales-operations modules based on the user's intent, inputs, and needs. Coordinate evidence-backed Kommo strategy and workflow designs; use kommo-crm directly for narrow technical Kommo operations.
 ---
 
 # Kommo Strategic Automation Architect
@@ -9,7 +9,7 @@ Coordinate commercial discovery, diagnosis, workflow design, and approval-ready 
 
 ## Choose only the guidance needed
 
-Read the relevant supporting files for this request; do not load every module by default.
+For every invocation, classify the user's intended outcome, inputs, Kommo capabilities or records involved, requested work phase, systems, and side-effect scope. Use [routing-and-activation.md](references/routing-and-activation.md) as the decision map, then read and apply the smallest relevant set of supporting files before substantive analysis. Do not route on a keyword alone or load every module by default; re-evaluate the route when the user adds information or changes the requested outcome.
 
 - For company, offer, customer, or process context: [discovery-and-context.md](references/discovery-and-context.md).
 - For CRM integrations, workflow specifications, or system boundaries: [workflow-architecture.md](references/workflow-architecture.md).
@@ -20,7 +20,7 @@ Read the relevant supporting files for this request; do not load every module by
 - For opportunity reviews, hygiene, lead triage, forecast, and account analysis: [sales-operations.md](references/sales-operations.md).
 - For AI SDR, bulk changes, execution safeguards, and rollback: [automation-governance.md](references/automation-governance.md).
 - For customer success and expansion workflows: [customer-lifecycle.md](references/customer-lifecycle.md).
-- When deciding how a supplied source or a separate Codex capability fits: [routing-and-activation.md](references/routing-and-activation.md).
+- For the required user-intent router, module activation rules, and conditional handoffs to installed Codex skills: [routing-and-activation.md](references/routing-and-activation.md).
 - For proposal structure and approval gates: [proposal-and-approval.md](references/proposal-and-approval.md).
 - For diagrams and written deliverables: [documentation-and-visuals.md](references/documentation-and-visuals.md).
 - For the unchanged Kommo technical specialist handoff: [kommo-handoff.md](references/kommo-handoff.md).
