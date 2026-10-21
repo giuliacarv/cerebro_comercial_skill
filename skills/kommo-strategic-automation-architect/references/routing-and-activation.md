@@ -1,6 +1,57 @@
 # Specialist routing and activation
 
-Use this map when a request spans the user's supplied source set or appears to require a separate skill, connector, or specialist.
+Use this map on every invocation of the master skill. It converts the user's requested outcome, provided context, named Kommo capability, intended deliverable, and implementation scope into a small set of internal modules and conditional specialist handoffs.
+
+## Route from intent, inputs, and needs
+
+First determine what result the user wants, not just which terms they used. For each request, identify:
+
+1. **Outcome:** understand/discover, diagnose, design, implement, audit/review, analyze/report, or document/train.
+2. **Business need:** the process constraint or user/job-to-be-done that makes the outcome useful; use only context the user supplied or evidence you can verify.
+3. **Kommo object or capability:** for example, AI agent, Salesbot, trigger, pipeline stage, lead, contact, field, chat, integration, or metric. If the term can mean different features, inspect context and ask a concise question only when the ambiguity changes the design or side effects.
+4. **Inputs and boundaries:** provided files/screenshots, available account or data access, channels, audience, time period, permissions, and what the user has authorized.
+5. **Work phase and effects:** read-only analysis vs a draft/proposal vs actual CRM writes, activation, bulk changes, or outbound messages.
+
+Then select **one primary module** for the main problem and add only the companion modules required by the user's needs. Read the selected reference(s) before reasoning from their specialty. A module is activated by opening and applying its internal reference; mentioning a module name is not evidence that it was read, and linking an upstream skill is not invoking it. If a follow-up changes the outcome or scope, route again using the new request plus the still-relevant conversation context.
+
+### User-need to module map
+
+| User intent, input, or need | Load this internal module | Add this companion when needed |
+| --- | --- | --- |
+| Understand the company, offer, ICP, buyer, current process, or missing business context | [discovery-and-context.md](discovery-and-context.md) | [workflow-architecture.md](workflow-architecture.md) when turning findings into a system/workflow design |
+| Decide whether to use a Kommo native AI agent, Salesbot, AI suggestion, or a handoff between them | [kommo-native-automation.md](kommo-native-automation.md) | [agentes-ia.md](agentes-ia.md) for native AI agent setup, sources, persona, tools, testing, limits, or behavior |
+| Learn Kommo AI product behavior or work specifically on native AI agent sources, persona, tools, tests, limits, or monitoring | Use the focused `$kommo-strategic-automation-architect-agentes-ia` entrypoint when it is available; otherwise read [agentes-ia.md](agentes-ia.md) | [kommo-native-automation.md](kommo-native-automation.md) if comparing AI with Salesbots/workflows; `kommo-crm` for account-specific configuration or readback |
+| Build a reusable Salesbot playbook; choose manual vs trigger-based execution; design message steps or branches; work with JSON, templates, imports/exports, or Salesbot API limits | [kommo-bots-playbooks-and-api.md](kommo-bots-playbooks-and-api.md) | [kommo-native-automation.md](kommo-native-automation.md) when the design compares Salesbots with native AI or pipeline automation |
+| Design a workflow, trigger, integration, data handoff, system boundary, or failure/retry path | [workflow-architecture.md](workflow-architecture.md) | [kommo-native-automation.md](kommo-native-automation.md) for Kommo-native automation choices; [automation-governance.md](automation-governance.md) for live effects, outbound, AI behavior, bulk changes, or rollback |
+| Review pipeline stages, stage definitions, funnel health, GTM architecture, or metric formulas | [revops-and-pipeline.md](revops-and-pipeline.md) | [discovery-and-context.md](discovery-and-context.md) if business definitions or ownership are missing |
+| Review deals, forecast, lead triage, account context/tiering, CRM hygiene, win/loss, or opportunity updates | [sales-operations.md](sales-operations.md) | [revops-and-pipeline.md](revops-and-pipeline.md) when the request depends on stages, conversion, or forecast definitions |
+| Design post-sale onboarding, customer health, retention, churn prevention, support handoff, or expansion | [customer-lifecycle.md](customer-lifecycle.md) | [sales-operations.md](sales-operations.md) when expansion changes an active opportunity or CRM record |
+| Plan AI SDR, outbound, bulk edits, activation safeguards, experiment controls, or reversibility | [automation-governance.md](automation-governance.md) | [discovery-and-context.md](discovery-and-context.md) for audience, offer, qualification, and business constraints |
+| Produce a written operating guide, Mermaid flow, diagram, or visual decision aid | [documentation-and-visuals.md](documentation-and-visuals.md) | Load the underlying business/technical module first when the deliverable must reflect a specific analysis |
+| Execute or audit an account-specific Kommo API/UI change, field mapping, data operation, permission check, or readback | No duplicate internal procedure; hand off to the installed [`kommo-crm` skill](#use-actual-codex-specialists-only-when-they-help) | Also load the relevant design module if the requested operation implements a strategy, Salesbot, AI agent, pipeline, or integration change |
+
+### Selection rules
+
+- Do not activate a module because a single word happens to match. For example, “bot” may mean a native AI agent, a Salesbot, or any automated workflow; use the requested behavior, inputs, and trigger needs to distinguish them.
+- Keep the route minimal: one primary module is the default; add a second only when a distinct need requires its method. Multiple modules are appropriate for cross-functional work, not as a checklist to complete on every request.
+- Load [discovery-and-context.md](discovery-and-context.md) when the business context is necessary and absent or when discovery itself is requested. Do not force a discovery interview before a narrow technical read or a sufficiently specified task.
+- Load [automation-governance.md](automation-governance.md) whenever the design or authorized action can send messages, alter records, change routing, affect many records, or activate autonomous behavior. This module adds controls; it does not itself grant authorization.
+- Consult `kommo-crm` for account-specific Kommo mechanics. A plan or mention of an API is not proof of connected tools, token scope, account identity, or write permission.
+- If inputs are incomplete, continue with the evidence available and mark assumptions. Ask only for missing information that materially changes the recommendation, recipient/audience, API/UI operation, or side effect; do independent read-only work while awaiting that answer.
+- If the request is narrow and technical, route directly to `kommo-crm` rather than making the strategic layer perform a full diagnosis.
+
+### Route examples
+
+| Example request | Route |
+| --- | --- |
+| “Quero que a IA qualifique leads e passe os casos prontos para um vendedor.” | `kommo-native-automation.md` + `agentes-ia.md` + `workflow-architecture.md`; add discovery only if the qualification process is unknown, governance if messages or autonomous actions are in scope, and `kommo-crm` for live account changes. |
+| “Monte um Salesbot manual com áudio e catálogo para a equipe enviar no chat.” | `kommo-bots-playbooks-and-api.md`; add discovery if audience/offer/message strategy is missing, governance if outbound message behavior is being designed, and `kommo-crm` if creating or verifying it in an account. |
+| “Por que caiu a conversão entre as etapas do funil?” | `revops-and-pipeline.md` + `sales-operations.md`; add discovery if stage definitions or commercial context are unclear. |
+| “Atualize o campo X pela API nesta conta.” | Route directly to `kommo-crm`; do not load the strategic modules unless the requested field change implements a broader workflow decision. |
+
+### Lightweight routing output
+
+For complex or cross-functional requests, state the route briefly before the analysis (for example, “Vou usar descoberta + arquitetura de workflow + governança, porque você quer desenhar uma automação com saída para clientes”). For a simple request, apply the route silently and answer directly. Do not expose internal file loading as a substitute for evidence or results.
 
 ## Know which layer you are invoking
 

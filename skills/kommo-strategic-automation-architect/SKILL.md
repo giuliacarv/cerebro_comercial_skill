@@ -1,6 +1,6 @@
 ---
 name: kommo-strategic-automation-architect
-description: Orchestrate discovery, RevOps diagnosis, and proposals for commercial workflows and automations in Kommo. Use when the request needs strategic analysis or cross-skill coordination; use kommo-crm directly for a narrow Kommo operation.
+description: Route commercial requests to the smallest relevant set of discovery, RevOps, Salesbot, Kommo AI, automation, and sales-operations modules based on the user's intent, inputs, and needs. Coordinate evidence-backed Kommo strategy and workflow designs; use kommo-crm directly for narrow technical Kommo operations.
 ---
 
 # Kommo Strategic Automation Architect
@@ -9,15 +9,18 @@ Coordinate commercial discovery, diagnosis, workflow design, and approval-ready 
 
 ## Choose only the guidance needed
 
-Read the relevant supporting files for this request; do not load every module by default.
+For every invocation, classify the user's intended outcome, inputs, Kommo capabilities or records involved, requested work phase, systems, and side-effect scope. Use [routing-and-activation.md](references/routing-and-activation.md) as the decision map, then read and apply the smallest relevant set of supporting files before substantive analysis. Do not route on a keyword alone or load every module by default; re-evaluate the route when the user adds information or changes the requested outcome.
 
 - For company, offer, customer, or process context: [discovery-and-context.md](references/discovery-and-context.md).
 - For CRM integrations, workflow specifications, or system boundaries: [workflow-architecture.md](references/workflow-architecture.md).
+- For choosing and designing Kommo native AI agents, Salesbots, and AI suggestions: [kommo-native-automation.md](references/kommo-native-automation.md). This is the product and workflow design guide; use `kommo-crm` for account-specific implementation mechanics.
+- For reusable Salesbot playbooks, manual `/` launch, triggerless bot libraries, JSON/editor choices, and the documented Salesbot API boundary: [kommo-bots-playbooks-and-api.md](references/kommo-bots-playbooks-and-api.md). Use `kommo-crm` for account-specific API/UI execution and secure credentials.
+- For detailed Kommo AI features, native AI agent setup, sources, persona, actions, testing, limits, Copilot, and AI suggestions: [agentes-ia.md](references/agentes-ia.md). The focused entrypoint is `$kommo-strategic-automation-architect-agentes-ia`; it loads this same reference without duplicating it.
 - For stages, pipeline, RevOps, and GTM metrics: [revops-and-pipeline.md](references/revops-and-pipeline.md).
 - For opportunity reviews, hygiene, lead triage, forecast, and account analysis: [sales-operations.md](references/sales-operations.md).
 - For AI SDR, bulk changes, execution safeguards, and rollback: [automation-governance.md](references/automation-governance.md).
 - For customer success and expansion workflows: [customer-lifecycle.md](references/customer-lifecycle.md).
-- When deciding how a supplied source or a separate Codex capability fits: [routing-and-activation.md](references/routing-and-activation.md).
+- For the required user-intent router, module activation rules, and conditional handoffs to installed Codex skills: [routing-and-activation.md](references/routing-and-activation.md).
 - For proposal structure and approval gates: [proposal-and-approval.md](references/proposal-and-approval.md).
 - For diagrams and written deliverables: [documentation-and-visuals.md](references/documentation-and-visuals.md).
 - For the unchanged Kommo technical specialist handoff: [kommo-handoff.md](references/kommo-handoff.md).
