@@ -4,6 +4,8 @@ Use this guide when a request involves the native Kommo AI agent, Salesbots, AI 
 
 For a detailed feature reference covering Kommo AI tools and the native AI agent, load [agentes-ia.md](agentes-ia.md). This guide remains the short architecture overview for selecting and combining AI agents, Salesbots, and deterministic pipeline automation.
 
+For the operating pattern of saving reusable Salesbots without an automatic trigger, manually launching one from a chat, working with JSON, or deciding what belongs in the public API, load [kommo-bots-playbooks-and-api.md](kommo-bots-playbooks-and-api.md).
+
 ## Select the right capability
 
 | Need | Kommo capability | Operating distinction |

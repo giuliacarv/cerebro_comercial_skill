@@ -6,7 +6,7 @@
 
 Use the orchestrator when a request crosses business process, pipeline, metrics, integrations, or automation design. It selects only the relevant internal playbook, gathers current evidence, and presents a specific plan before material changes. For a narrow Kommo read or operation, use `kommo-crm` directly.
 
-The package contains original, task-focused guidance informed by the linked references in [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md). Those URLs are research sources, not skills installed in Codex; [`routing-and-activation.md`](skills/kommo-strategic-automation-architect/references/routing-and-activation.md) explains how each source maps to an internal playbook or a real skill available in the current environment. The repository does not vendor third-party skill files or contain account snapshots, CRM exports, credentials, or customer data.
+The tracked package contains original, task-focused guidance informed by the linked references in [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md). Those URLs are research sources, not skills installed in Codex; [`routing-and-activation.md`](skills/kommo-strategic-automation-architect/references/routing-and-activation.md) explains how each source maps to an internal playbook or a real skill available in the current environment. Tracked skill files do not vendor third-party skills or include account snapshots, CRM exports, credentials, or customer data. Local untracked inputs are not part of the installed skill or Git publication.
 
 ## Install in Codex
 
@@ -51,6 +51,7 @@ This image from the user is represented as a workflow: request → orchestrator 
 | --- | --- |
 | `skills/kommo-strategic-automation-architect/SKILL.md` | Strategic Codex entrypoint and routing rules |
 | `skills/kommo-strategic-automation-architect/references/agentes-ia.md` | Detailed Portuguese reference and source index for Kommo AI and native AI agents |
+| `skills/kommo-strategic-automation-architect/references/kommo-bots-playbooks-and-api.md` | Salesbot library patterns, manual runs, JSON, triggers, and public API boundaries |
 | `skills/kommo-strategic-automation-architect-agentes-ia/SKILL.md` | Focused Codex entrypoint that loads the shared AI reference |
 | `skills/kommo-strategic-automation-architect/references/` | Focused playbooks loaded only when relevant |
 | `SOURCE_REGISTER.md` | Inventory, adaptation notes, and license/source attribution |

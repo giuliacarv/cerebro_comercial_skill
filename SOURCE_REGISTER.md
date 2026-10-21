@@ -47,6 +47,16 @@ The following official documentation was reviewed on 2026-10-20 for the original
 
 The repository links to these pages and summarizes their product behavior in original wording. It does not include a verbatim local copy of Kommo's support articles. Plan limits, feature availability, UI labels, and product behavior are changeable; verify the official pages and the target workspace before implementation.
 
+## Official Kommo Salesbot and API documentation
+
+The following primary sources were reviewed on 2026-10-21 for [`kommo-bots-playbooks-and-api.md`](skills/kommo-strategic-automation-architect/references/kommo-bots-playbooks-and-api.md):
+
+- Salesbot authoring, triggers, templates, manual execution, message steps, and interruptions: [create a Salesbot](https://support.kommo.com/docs/pt-br/create-a-salesbot-in-kommo), [configure triggers](https://support.kommo.com/docs/pt-br/configure-your-salesbot-triggers), [use Salesbot templates](https://support.kommo.com/docs/pt-br/use-salesbot-templates), [manual chat launch guide for Messenger](https://support.kommo.com/resources/docs/pt-br/personalizar-mensagens-facebook), and [Salesbot overview](https://support.kommo.com/docs/pt-br/salesbot-overview).
+- JSON authoring and the public REST API surface: [Salesbot developer documentation](https://developers.kommo.com/docs/salesbot-dp), [Salesbots list](https://developers.kommo.com/reference/salesbots-list), [launch](https://developers.kommo.com/reference/launch-a-salesbot), [stop](https://developers.kommo.com/reference/stop-salesbot), [custom fields](https://developers.kommo.com/reference/custom-fields), and [API support policy](https://developers.kommo.com/reference/kommo-api-reference).
+- Authentication and credential handling: [private integration](https://developers.kommo.com/docs/private-integration), [long-lived token](https://developers.kommo.com/docs/long-lived-token), and [OAuth 2.0](https://developers.kommo.com/docs/oauth-20).
+
+The module separates official documentation from user-reported interface observations, notably the `/bots` shortcut and export behavior. The official sources reviewed confirm Salesbot import, JSON/code authoring, and the listed read/run/stop API methods; verify any additional UI or API operation against the current workspace and published API reference.
+
 ## License handling
 
 The repository's [`LICENSE`](LICENSE) applies to the original materials in this project only. It does not override third-party license terms. This source register records attribution and whether a license was checked; it is not legal advice. Recheck each repository's current license and the individual file's terms before copying, redistributing, or adapting expressive text. The project intentionally links to the upstream sources instead of bundling their skill files.
