@@ -73,3 +73,18 @@ This image from the user is represented as a workflow: request → orchestrator 
 ## Refreshing source material
 
 Source projects can change. Before adopting an update, review the current upstream file, license, platform assumptions, and behavior against the local Kommo skill and this package's approval model. Update [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) with the review date and any change in license or adaptation. Do not auto-import upstream instructions.
+
+## Protocolo de desenvolvimento e continuidade
+
+Antes de desenvolver, siga [AGENTS.md](AGENTS.md): reinspecione o repositório remoto,
+consulte os módulos afetados e trabalhe em branch para revisão por Pull Request.
+Toda implementação deve atualizar o inventário e produzir um relatório com evidências,
+testes, decisões, limitações e próximos passos para o arquiteto ChatGPT.
+
+- [Protocolo e validações locais](docs/relatorios-codex/README.md).
+- [Último relatório de continuidade](docs/relatorios-codex/ULTIMO_RELATORIO.md).
+- [Histórico inicial — Tarefa 001](docs/relatorios-codex/historico/2026-10-22-governanca-continuidade.md).
+- [Inventário estruturado da skill](docs/estado/ESTADO_DA_SKILL.json).
+
+Os estados do inventário distinguem documentação, implementação e validação com escopo
+explícito. Validação estrutural local não comprova operação em uma conta Kommo real.

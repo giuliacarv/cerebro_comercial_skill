@@ -1,0 +1,576 @@
+{
+  "versao_esquema": "1.0.0",
+  "atualizado_em": "2026-10-22T08:52:27-03:00",
+  "revisao_base": "fe5fcc24da527a3edda57bba65d4813665654339",
+  "escopo_revisao": "origin/main sincronizada; os artefatos novos são identificados pela branch e pelo commit publicado na entrega, não por hash autorreferente.",
+  "definicoes_status": "docs/relatorios-codex/README.md",
+  "modulos": [
+    {
+      "id": "orquestrador",
+      "caminho": "skills/kommo-strategic-automation-architect/SKILL.md",
+      "responsabilidade": "Coordenar descoberta, diagnóstico, roteamento seletivo e propostas comerciais.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/SKILL.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "runtime-agent-skills",
+        "kommo-crm-quando-houver-operacao"
+      ]
+    },
+    {
+      "id": "entrada-agentes-ia",
+      "caminho": "skills/kommo-strategic-automation-architect-agentes-ia/SKILL.md",
+      "responsabilidade": "Carregar o módulo compartilhado de IA nativa por entrada especializada.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect-agentes-ia/SKILL.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "runtime-agent-skills",
+        "agentes-ia"
+      ]
+    },
+    {
+      "id": "agentes-ia",
+      "caminho": "skills/kommo-strategic-automation-architect/references/agentes-ia.md",
+      "responsabilidade": "Orientar IA nativa, fontes, persona, ações, limites e homologação.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/agentes-ia.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "kommo-crm-quando-houver-operacao"
+      ]
+    },
+    {
+      "id": "automation-governance",
+      "caminho": "skills/kommo-strategic-automation-architect/references/automation-governance.md",
+      "responsabilidade": "Definir controles para automações, operações em lote e reversão.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/automation-governance.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "customer-lifecycle",
+      "caminho": "skills/kommo-strategic-automation-architect/references/customer-lifecycle.md",
+      "responsabilidade": "Orientar pós-venda, saúde, retenção e expansão.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/customer-lifecycle.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "discovery-and-context",
+      "caminho": "skills/kommo-strategic-automation-architect/references/discovery-and-context.md",
+      "responsabilidade": "Estabelecer contexto comercial e descoberta baseada em evidências.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/discovery-and-context.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "documentation-and-visuals",
+      "caminho": "skills/kommo-strategic-automation-architect/references/documentation-and-visuals.md",
+      "responsabilidade": "Orientar documentação e diagramas conforme a necessidade.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/documentation-and-visuals.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "kommo-bots-playbooks-and-api",
+      "caminho": "skills/kommo-strategic-automation-architect/references/kommo-bots-playbooks-and-api.md",
+      "responsabilidade": "Orientar playbooks Salesbot, gatilhos, JSON e limites da API pública.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/kommo-bots-playbooks-and-api.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "kommo-crm-quando-houver-operacao"
+      ]
+    },
+    {
+      "id": "kommo-handoff",
+      "caminho": "skills/kommo-strategic-automation-architect/references/kommo-handoff.md",
+      "responsabilidade": "Definir passagem autorizada à skill técnica independente kommo-crm.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/kommo-handoff.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "kommo-crm-quando-houver-operacao"
+      ]
+    },
+    {
+      "id": "kommo-native-automation",
+      "caminho": "skills/kommo-strategic-automation-architect/references/kommo-native-automation.md",
+      "responsabilidade": "Selecionar e coordenar IA nativa, Salesbot e sugestões assistidas.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/kommo-native-automation.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "kommo-crm-quando-houver-operacao"
+      ]
+    },
+    {
+      "id": "proposal-and-approval",
+      "caminho": "skills/kommo-strategic-automation-architect/references/proposal-and-approval.md",
+      "responsabilidade": "Estruturar propostas e autorização para efeitos materiais.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/proposal-and-approval.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "revops-and-pipeline",
+      "caminho": "skills/kommo-strategic-automation-architect/references/revops-and-pipeline.md",
+      "responsabilidade": "Orientar pipeline, métricas e diagnóstico RevOps.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/revops-and-pipeline.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "routing-and-activation",
+      "caminho": "skills/kommo-strategic-automation-architect/references/routing-and-activation.md",
+      "responsabilidade": "Selecionar módulos por intenção, entradas e escopo da tarefa.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/routing-and-activation.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "sales-operations",
+      "caminho": "skills/kommo-strategic-automation-architect/references/sales-operations.md",
+      "responsabilidade": "Orientar análises de oportunidades, higiene, previsão e triagem.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/sales-operations.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "workflow-architecture",
+      "caminho": "skills/kommo-strategic-automation-architect/references/workflow-architecture.md",
+      "responsabilidade": "Especificar workflows, integrações, idempotência e recuperação.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/references/workflow-architecture.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "interface-codex",
+      "caminho": "skills/kommo-strategic-automation-architect/agents/openai.yaml",
+      "responsabilidade": "Configurar nome, descrição e prompt da entrada estratégica no Codex.",
+      "status_implementacao": "implementado",
+      "evidencias": [
+        {
+          "caminho": "skills/kommo-strategic-automation-architect/agents/openai.yaml",
+          "observacao": "Artefato entregue; validação restrita ao escopo local descrito em testes."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "runtime-agent-skills"
+      ]
+    },
+    {
+      "id": "mapa-interface",
+      "caminho": "Interface e Recursos do Kommo/Agente de IA Nativo/MAPA_RECURSOS.md",
+      "responsabilidade": "Descrever recursos observados em capturas históricas, sem publicar capturas ou dados da conta.",
+      "status_implementacao": "documentado",
+      "evidencias": [
+        {
+          "caminho": "Interface e Recursos do Kommo/Agente de IA Nativo/MAPA_RECURSOS.md",
+          "observacao": "Artefato presente e lido na inspeção; texto ou configuração não comprova execução operacional."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Execução operacional em conta Kommo real",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": []
+    },
+    {
+      "id": "governanca",
+      "caminho": "AGENTS.md",
+      "responsabilidade": "Estabelecer inspeção, branches, relatórios, inventário e validação de continuidade.",
+      "status_implementacao": "implementado",
+      "evidencias": [
+        {
+          "caminho": "AGENTS.md",
+          "observacao": "Artefato entregue; validação restrita ao escopo local descrito em testes."
+        },
+        {
+          "caminho": "docs/relatorios-codex/README.md",
+          "observacao": "Componente da governança e evidência local de continuidade."
+        },
+        {
+          "caminho": "docs/relatorios-codex/ULTIMO_RELATORIO.md",
+          "observacao": "Componente da governança e evidência local de continuidade."
+        },
+        {
+          "caminho": "docs/relatorios-codex/historico/2026-10-22-governanca-continuidade.md",
+          "observacao": "Componente da governança e evidência local de continuidade."
+        },
+        {
+          "caminho": "scripts/validar_governanca.py",
+          "observacao": "Componente da governança e evidência local de continuidade."
+        },
+        {
+          "caminho": "tests/test_validar_governanca.py",
+          "observacao": "Componente da governança e evidência local de continuidade."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Integridade estrutural local do caminho e, para Markdown, links explícitos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: python scripts/validar_governanca.py; saída zero, caminhos existentes e estrutura coerente. Sem validação de comportamento comercial."
+        },
+        {
+          "escopo": "Adoção automática do protocolo por futuras execuções",
+          "status": "não_verificado",
+          "evidencia": "Não executada; documentação não comprova esse comportamento."
+        }
+      ],
+      "dependencias": [
+        "python3-para-validacao",
+        "git"
+      ]
+    }
+  ],
+  "testes": {
+    "ambiente": "Windows / Python 3.13.14 / biblioteca padrão / sem acesso ao CRM",
+    "cobertura": "Caminhos dos dois SKILL.md, 13 referências, YAML e mapa; links Markdown, inventário, relatório e testes do validador. Sem cobertura percentual de execução comercial.",
+    "estrutural": {
+      "status": "validado",
+      "evidencia": "2026-10-22: python -m unittest discover -s tests -v (7 testes, OK); python scripts/validar_governanca.py (23 Markdown, 2 entradas, 18 módulos, JSON e relatórios íntegros).",
+      "comandos": [
+        "python -m unittest discover -s tests -v",
+        "python scripts/validar_governanca.py",
+        "git diff --check"
+      ],
+      "limite": "Verificação estrutural local; não valida execução no runtime ou conta Kommo."
+    },
+    "integracao_kommo": {
+      "status": "não_verificado",
+      "evidencia": "Não executada; tarefa não requer conta CRM."
+    }
+  },
+  "dependencias_externas": [
+    {
+      "id": "runtime-agent-skills",
+      "status": "não_verificado",
+      "descricao": "Descoberta e execução das duas skills dependem de instalação conjunta e runtime compatível; não testadas nesta tarefa."
+    },
+    {
+      "id": "kommo-crm-quando-houver-operacao",
+      "status": "não_verificado",
+      "descricao": "Skill independente; disponibilidade, ferramentas, conta e permissões devem ser verificadas por execução técnica. Não copiada nem alterada."
+    },
+    {
+      "id": "kommo-e-fontes-oficiais",
+      "status": "não_verificado",
+      "descricao": "Plano, APIs, canais, limites e documentação Kommo podem mudar. URLs externas não foram revalidadas nesta tarefa documental."
+    },
+    {
+      "id": "python3-para-validacao",
+      "status": "implementado",
+      "descricao": "Python 3.13.14 disponível no ambiente desta execução; scripts usam biblioteca padrão."
+    },
+    {
+      "id": "git",
+      "status": "implementado",
+      "descricao": "Git disponível, origin/main obtida por fetch e atualização fast-forward."
+    }
+  ],
+  "limitacoes_conhecidas": [
+    "Repositório público em 2026-10-22, enquanto README recomenda privacidade e LICENSE contém termos proprietários; decisão do proprietário pendente.",
+    "Sem CI ou proteção de branch implantada por esta tarefa; governança depende de cumprimento das instruções.",
+    "Playbooks são orientações documentais; integridade não valida comportamento de agentes ou efeitos em contas.",
+    "Validador reconhece links Markdown explícitos simples e âncoras de títulos ATX; não é parser Markdown completo nem scanner de segredos.",
+    "Insumos locais não rastreados, .agents/skills/codex-cost-reducer/ surgida durante a execução e PNGs ignorados não integram o inventário distribuído."
+  ],
+  "proximas_evolucoes": [
+    {
+      "prioridade": "P1",
+      "evolucao": "Automatizar verificações estruturais no PR",
+      "criterios_aceitacao": [
+        "CI executa unittest, validador e diff check sem credenciais CRM.",
+        "PR com link quebrado, inventário incompleto ou relatório divergente falha."
+      ]
+    },
+    {
+      "prioridade": "P2",
+      "evolucao": "Criar cenários fictícios de regressão do roteamento seletivo",
+      "criterios_aceitacao": [
+        "Casos de IA, Salesbot, RevOps e operação técnica têm rota esperada e justificativa revisadas.",
+        "Casos ambíguos e negativos cobrem carregamento mínimo e autorização sem acesso ao CRM."
+      ]
+    },
+    {
+      "prioridade": "P3",
+      "evolucao": "Definir homologação operacional autorizada em ambiente isolado",
+      "criterios_aceitacao": [
+        "Conta, escopo, responsável, dados fictícios, autorização e reversão estão definidos antes da execução.",
+        "Critérios cobrem persistência de campos, silêncio, duplicidade e handoff; só resultados observados promovem status."
+      ]
+    }
+  ]
+}
