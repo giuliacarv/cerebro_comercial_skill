@@ -1,8 +1,8 @@
 {
   "versao_esquema": "1.0.0",
-  "atualizado_em": "2026-10-22T08:52:27-03:00",
+  "atualizado_em": "2026-10-22T09:19:09-03:00",
   "revisao_base": "fe5fcc24da527a3edda57bba65d4813665654339",
-  "escopo_revisao": "origin/main sincronizada; os artefatos novos são identificados pela branch e pelo commit publicado na entrega, não por hash autorreferente.",
+  "escopo_revisao": "origin/main sincronizada; dependência explícita do commit 607b7f16e66b569fb46cafc3869baba06bad1f31 (PR #2 ainda pendente), incorporado por fast-forward à branch feat/ci-governanca.",
   "definicoes_status": "docs/relatorios-codex/README.md",
   "modulos": [
     {
@@ -493,14 +493,47 @@
         "python3-para-validacao",
         "git"
       ]
+    },
+    {
+      "id": "ci-governanca",
+      "caminho": ".github/workflows/governanca.yml",
+      "responsabilidade": "Executar testes, validação estrutural e verificação do diff em Pull Requests.",
+      "status_implementacao": "implementado",
+      "evidencias": [
+        {
+          "caminho": ".github/workflows/governanca.yml",
+          "observacao": "Workflow pull_request com Python 3.13, actions fixadas por SHA e permissão contents: read."
+        },
+        {
+          "caminho": "tests/test_ci_governanca.py",
+          "observacao": "Cenários de comando em cópias temporárias comprovam sucesso e rejeição de entradas inválidas."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Comandos locais equivalentes à CI e falhas deliberadas",
+          "status": "validado",
+          "evidencia": "2026-10-22: testes executam o validador real em cópias temporárias e exigem saída não zero para link quebrado, inventário incompleto e relatório divergente; git diff --check rejeita whitespace em snapshots."
+        },
+        {
+          "escopo": "Execução no GitHub Actions",
+          "status": "não_verificado",
+          "evidencia": "O snapshot é anterior à publicação; consultar Checks do PR e a entrega final para o resultado remoto."
+        }
+      ],
+      "dependencias": [
+        "github-actions",
+        "python3-para-validacao",
+        "git"
+      ]
     }
   ],
   "testes": {
-    "ambiente": "Windows / Python 3.13.14 / biblioteca padrão / sem acesso ao CRM",
-    "cobertura": "Caminhos dos dois SKILL.md, 13 referências, YAML e mapa; links Markdown, inventário, relatório e testes do validador. Sem cobertura percentual de execução comercial.",
+    "ambiente": "Windows / Python 3.13.14 do runtime Codex / biblioteca padrão; workflow configurado para Ubuntu 24.04 e Python 3.13; sem CRM.",
+    "cobertura": "Links, duas entradas, JSON, 19 módulos, relatórios, sete testes unitários e cinco testes de comando com cópias temporárias. Sem cobertura de execução comercial.",
     "estrutural": {
       "status": "validado",
-      "evidencia": "2026-10-22: python -m unittest discover -s tests -v (7 testes, OK); python scripts/validar_governanca.py (23 Markdown, 2 entradas, 18 módulos, JSON e relatórios íntegros).",
+      "evidencia": "2026-10-22: 12 testes aprovados (7 unitários e 5 de comando/diff); validador aprovado sobre 24 Markdown, duas entradas e 19 módulos. Windows/Python 3.13.14; execução remota registrada separadamente após publicação.",
       "comandos": [
         "python -m unittest discover -s tests -v",
         "python scripts/validar_governanca.py",
@@ -538,38 +571,44 @@
       "id": "git",
       "status": "implementado",
       "descricao": "Git disponível, origin/main obtida por fetch e atualização fast-forward."
+    },
+    {
+      "id": "github-actions",
+      "status": "não_verificado",
+      "descricao": "Runner hospedado, disponibilidade de Actions e políticas de execução de PRs/forks. Execução remota só pode ser comprovada após publicação."
     }
   ],
   "limitacoes_conhecidas": [
     "Repositório público em 2026-10-22, enquanto README recomenda privacidade e LICENSE contém termos proprietários; decisão do proprietário pendente.",
-    "Sem CI ou proteção de branch implantada por esta tarefa; governança depende de cumprimento das instruções.",
+    "Workflow entregue; regras de proteção de branch não foram alteradas. Tornar o check obrigatório requer configuração administrativa posterior.",
     "Playbooks são orientações documentais; integridade não valida comportamento de agentes ou efeitos em contas.",
     "Validador reconhece links Markdown explícitos simples e âncoras de títulos ATX; não é parser Markdown completo nem scanner de segredos.",
-    "Insumos locais não rastreados, .agents/skills/codex-cost-reducer/ surgida durante a execução e PNGs ignorados não integram o inventário distribuído."
+    "Insumos locais não rastreados, .agents/skills/codex-cost-reducer/ surgida durante a execução e PNGs ignorados não integram o inventário distribuído.",
+    "PR de CI depende do PR #2; main permanece preservada. Resultado remoto será fornecido após publicação, sem hash autorreferente no snapshot."
   ],
   "proximas_evolucoes": [
     {
       "prioridade": "P1",
-      "evolucao": "Automatizar verificações estruturais no PR",
+      "evolucao": "Criar cenários fictícios de regressão do roteamento seletivo",
       "criterios_aceitacao": [
-        "CI executa unittest, validador e diff check sem credenciais CRM.",
-        "PR com link quebrado, inventário incompleto ou relatório divergente falha."
+        "Casos de IA, Salesbot, RevOps e operação técnica têm rotas esperadas revisadas.",
+        "Casos negativos cobrem intenção ambígua, carregamento mínimo e autorização, sem acesso ao CRM."
       ]
     },
     {
       "prioridade": "P2",
-      "evolucao": "Criar cenários fictícios de regressão do roteamento seletivo",
+      "evolucao": "Tornar o check obrigatório após incorporação dos PRs",
       "criterios_aceitacao": [
-        "Casos de IA, Salesbot, RevOps e operação técnica têm rota esperada e justificativa revisadas.",
-        "Casos ambíguos e negativos cobrem carregamento mínimo e autorização sem acesso ao CRM."
+        "Com aprovação administrativa, a branch de destino exige Validar governança.",
+        "Uma execução vermelha impede merge; regras aplicadas e limitações de bypass são registradas."
       ]
     },
     {
       "prioridade": "P3",
       "evolucao": "Definir homologação operacional autorizada em ambiente isolado",
       "criterios_aceitacao": [
-        "Conta, escopo, responsável, dados fictícios, autorização e reversão estão definidos antes da execução.",
-        "Critérios cobrem persistência de campos, silêncio, duplicidade e handoff; só resultados observados promovem status."
+        "Conta, escopo, responsável, dados fictícios, autorização e reversão definidos antes da execução.",
+        "Persistência, silêncio, duplicidade e handoff só recebem validação após efeitos observados."
       ]
     }
   ]

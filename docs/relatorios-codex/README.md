@@ -89,4 +89,39 @@ evite incluir insumos locais não rastreados com `git add .`.
 ## Consulta ao histórico
 
 - [Tarefa 001 — governança e continuidade](historico/2026-10-22-governanca-continuidade.md).
+- [Tarefa 002 — verificações automáticas nos PRs](historico/2026-10-22-ci-governanca.md).
 - [Última execução](ULTIMO_RELATORIO.md).
+
+## Verificações automáticas nos Pull Requests
+
+O workflow [governanca.yml](../../.github/workflows/governanca.yml) executa os testes,
+o validador e `git diff --check` sobre as alterações do PR em relação ao commit da branch
+de destino. Usar apenas `git diff --check` após checkout não detectaria whitespace já commitado.
+O job exibido no PR chama-se **Validar governança**.
+
+Ele roda em abertura, atualização de commits, reabertura, liberação para revisão e edição
+do PR, incluindo troca de base. Não há filtros de caminho ou branch: PRs sobre branches
+dependentes também são verificados. Execuções antigas do mesmo PR são canceladas.
+Conflitos de merge e políticas de aprovação de workflows de forks podem impedir a execução;
+nesses casos, confira o status do PR antes de interpretar ausência de resultado como sucesso.
+
+O ambiente é Ubuntu 24.04 com Python 3.13, sem pacotes Python adicionais. Actions oficiais
+de checkout e setup-python estão fixadas por hash completo e devem ser revisadas ao atualizar.
+A permissão do token automático é `contents: read`; ele não persiste no checkout.
+Nenhum segredo de repositório ou credencial Kommo é usado, nem há chamada ao CRM.
+
+Os testes de comando executam o validador real em repositórios temporários e comprovam
+falha para link quebrado, inventário incompleto e relatório divergente, além de whitespace
+em snapshots Git. Dados e alterações deliberadamente inválidos ficam apenas nos temporários.
+Os resultados e logs ficam na aba Checks do PR e no GitHub Actions.
+As cópias usam `git ls-files`: ao desenvolver com arquivos novos, adicione seus caminhos
+explicitamente ao índice antes de executar a suíte, para que também façam parte do cenário.
+
+Uma execução vermelha sinaliza reprovação. Impedir tecnicamente o merge exige configurar
+**Validar governança** como verificação obrigatória nas regras da branch; este workflow não
+altera essas regras. Antes de exigir o check, ele deve estar incorporado à branch de destino
+e ter uma execução observada. O PR da Tarefa 002 depende do PR de governança #2.
+
+Referências oficiais consultadas em 2026-10-22:
+[eventos pull_request](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request),
+[checkout](https://github.com/actions/checkout) e [setup-python](https://github.com/actions/setup-python).
