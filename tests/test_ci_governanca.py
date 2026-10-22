@@ -56,12 +56,61 @@ class ValidationCommandTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("ausentes do inventário", result.stdout)
 
+    def test_command_rejects_missing_required_file(self):
+        (self.root / "LICENSE").unlink()
+        result = self.validate()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("LICENSE: arquivo obrigatório ausente", result.stdout)
+
+    def test_command_rejects_invalid_inventory_json_with_location(self):
+        path = self.root / "docs/estado/ESTADO_DA_SKILL.json"
+        path.write_text("{\n", encoding="utf-8")
+        result = self.validate()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("docs/estado/ESTADO_DA_SKILL.json", result.stdout)
+        self.assertIn("JSON inválido na linha", result.stdout)
+
+    def test_command_rejects_inventory_target_that_does_not_exist(self):
+        path = self.root / "docs/estado/ESTADO_DA_SKILL.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data["modulos"][0]["caminho"] = "arquivo-inexistente.md"
+        path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+        result = self.validate()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("caminho ausente", result.stdout)
+
+    def test_command_accepts_unverified_kommo_dependency(self):
+        path = self.root / "docs/estado/ESTADO_DA_SKILL.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        kommo = next(item for item in data["dependencias_externas"] if item["id"].startswith("kommo-crm"))
+        self.assertEqual(kommo["status"], "não_verificado")
+        result = self.validate()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("AVISO: Dependência externa kommo-crm", result.stdout)
+
+    def test_command_does_not_probe_external_links(self):
+        with (self.root / "README.md").open("a", encoding="utf-8") as stream:
+            stream.write("\n[Referência externa](https://192.0.2.1/recurso)\n")
+        result = self.validate()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_workflow_targets_main_and_supports_manual_runs(self):
+        workflow = (ROOT / ".github/workflows/validar-governanca.yml").read_text(encoding="utf-8")
+        self.assertIn("pull_request:\n    branches: [main]", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("permissions:\n  contents: read", workflow)
+        self.assertNotIn("pull_request_target", workflow)
+        self.assertIn("timeout-minutes: 10", workflow)
+        self.assertIn("python scripts/validar_diff_pr.py", workflow)
+        dependent = (ROOT / ".github/workflows/governanca.yml").read_text(encoding="utf-8")
+        self.assertIn("branches: ['**', '!main']", dependent)
+
     def test_command_rejects_divergent_report(self):
         with (self.root / "docs/relatorios-codex/ULTIMO_RELATORIO.md").open("a", encoding="utf-8") as stream:
             stream.write("\nAlteração sem atualização do histórico.\n")
         result = self.validate()
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("Último relatório diverge", result.stdout)
+        self.assertIn("diverge do relatório histórico", result.stdout)
 
     def test_git_check_rejects_whitespace_in_committed_diff(self):
         # write-tree compara snapshots do índice sem criar commits ou usar identidade pessoal.
