@@ -1,17 +1,20 @@
-Histórico: [Tarefa 002](historico/2026-10-22-ci-governanca.md).
+Histórico: [Tarefa 002 — validação](historico/2026-10-22-ci-governanca-validacao.md).
 
-# Tarefa 002 — Verificações automáticas de governança nos PRs
+# Tarefa 002 — Evidência de validação remota da CI
 
 ## 1. Identificação da execução, branch e objetivo
 
-Execução: TAREFA-002, em 2026-10-22, America/Sao_Paulo (UTC−03:00).
+Execução: TAREFA-002-VALIDACAO, em 2026-10-22, America/Sao_Paulo (UTC−03:00).
 Branch: `feat/ci-governanca`. Objetivo: automatizar testes, integridade e diff em Pull Requests.
 Base remota inspecionada: `fe5fcc24da527a3edda57bba65d4813665654339` (`origin/main`).
 Dependência explícita: `607b7f16e66b569fb46cafc3869baba06bad1f31`, do PR #2 de governança,
 ainda não incorporado à main no início desta execução. A branch foi criada da main atualizada
 e avançada por fast-forward até essa dependência. Nenhum merge foi feito na main.
 O PR desta evolução compara com `feat/governanca-relatorios-codex`, isolando a revisão de CI.
-O hash da implementação e os resultados remotos são entregues após commit/publicação.
+Implementação publicada em `9b1e08fc02922f0301b03973a4482dcbe2e3d836`,
+[PR #3](https://github.com/giuliacarv/cerebro_comercial_skill/pull/3). Este segundo registro preserva
+o [snapshot anterior à publicação](historico/2026-10-22-ci-governanca.md) e acrescenta evidência observada.
+O hash deste registro documental será entregue após o commit, sem autorreferência.
 
 ## 2. Diagnóstico inicial do repositório
 
@@ -39,6 +42,8 @@ Alterados:
 - [Último relatório](ULTIMO_RELATORIO.md), atualizado para esta execução.
 - [Inventário](../estado/ESTADO_DA_SKILL.json), com módulo de CI e três próximas evoluções.
 
+Neste fechamento adicional, foram atualizados inventário e último relatório e criado este
+registro `2026-10-22-ci-governanca-validacao.md`. O relatório inicial da Tarefa 002 foi preservado.
 Nenhum arquivo removido. O histórico da Tarefa 001, os dois SKILL.md, as 13 referências,
 o YAML da skill, mapa, arquitetura, fontes, licença e README da raiz foram preservados.
 
@@ -56,7 +61,8 @@ Não há dependências Python adicionais, segredos configurados, credenciais Kom
 
 Cinco testes de comando usam cópias temporárias: repositório válido passa; link quebrado,
 inventário incompleto, relatório divergente e whitespace no diff falham.
-As falhas são deliberadas, locais e isoladas; não são publicadas como alterações inválidas.
+As falhas são deliberadas e isoladas em temporários, tanto localmente quanto no runner;
+não são publicadas como alterações inválidas.
 
 ## 5. Decisões arquiteturais e justificativas
 
@@ -81,10 +87,10 @@ os 12 testes passaram. Essa exigência de preparação está documentada no prot
 | Verificação | Resultado |
 | --- | --- |
 | Testes unitários e de comando | `python -m unittest discover -s tests -v`: 12 testes aprovados, incluindo os cinco cenários reais de processo/diff. |
-| Validador de governança | `python scripts/validar_governanca.py`: 24 Markdown, duas entradas, 19 módulos; saída zero. |
+| Validador de governança | `python scripts/validar_governanca.py`: 25 Markdown, duas entradas, 19 módulos; saída zero. |
 | Diff e preservação das skills | `git diff --check`, `git diff --cached --check` e comparação com a dependência: sem erro de whitespace; skills, histórico anterior e documentos originais sem alterações. |
 | Revisão de segredos/dados pessoais | Revisão dos seis arquivos do diff e varredura por padrões de credenciais, JWT, chaves privadas, e-mails, CPF e telefone sem ocorrências. |
-| GitHub Actions | Não verificado neste snapshot anterior à publicação; URL e resultado remoto serão entregues ao arquiteto após execução. |
+| GitHub Actions | [Execução 39777854814](https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39777854814): concluída com success, evento pull_request, commit `9b1e08fc02922f0301b03973a4482dcbe2e3d836`. Todos os passos do job Validar governança aprovados no Ubuntu. Essa execução inspecionou 24 Markdown; este novo registro eleva o conjunto local a 25. |
 | Integração Kommo | Não executada; não_verificado. |
 
 ## 7. Estado atual das capacidades da skill
@@ -108,8 +114,8 @@ na Tarefa 001. Licença e distribuição continuam preservadas.
 ## 9. Pendências e dependências externas
 
 Aprovar primeiro o PR #2; depois ajustar a base do PR de CI para main e incorporar por revisão.
-Nenhum merge automático está autorizado pelo protocolo. Aguardar primeira execução do workflow
-no GitHub Actions e consultar os Checks do PR; a entrega final deve fornecer o resultado observado.
+Nenhum merge automático está autorizado pelo protocolo. A primeira execução foi observada com sucesso e está vinculada neste registro.
+O novo commit apenas documental será revalidado pela mesma CI; sua evidência será entregue ao final.
 Runner GitHub, actions oficiais e acesso para publicar são dependências externas.
 Insumos não rastreados continuam fora da publicação. Não há dependência de conta Kommo nesta tarefa.
 

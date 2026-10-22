@@ -1,6 +1,6 @@
 {
   "versao_esquema": "1.0.0",
-  "atualizado_em": "2026-10-22T09:19:09-03:00",
+  "atualizado_em": "2026-10-22T09:25:55-03:00",
   "revisao_base": "fe5fcc24da527a3edda57bba65d4813665654339",
   "escopo_revisao": "origin/main sincronizada; dependência explícita do commit 607b7f16e66b569fb46cafc3869baba06bad1f31 (PR #2 ainda pendente), incorporado por fast-forward à branch feat/ci-governanca.",
   "definicoes_status": "docs/relatorios-codex/README.md",
@@ -498,7 +498,7 @@
       "id": "ci-governanca",
       "caminho": ".github/workflows/governanca.yml",
       "responsabilidade": "Executar testes, validação estrutural e verificação do diff em Pull Requests.",
-      "status_implementacao": "implementado",
+      "status_implementacao": "validado",
       "evidencias": [
         {
           "caminho": ".github/workflows/governanca.yml",
@@ -507,6 +507,11 @@
         {
           "caminho": "tests/test_ci_governanca.py",
           "observacao": "Cenários de comando em cópias temporárias comprovam sucesso e rejeição de entradas inválidas."
+        },
+        {
+          "caminho": "docs/relatorios-codex/historico/2026-10-22-ci-governanca-validacao.md",
+          "observacao": "Execução remota 39777854814 concluída com success em 2026-10-22 sobre 9b1e08fc02922f0301b03973a4482dcbe2e3d836; todos os passos do job aprovados.",
+          "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39777854814"
         }
       ],
       "testes": [
@@ -517,8 +522,9 @@
         },
         {
           "escopo": "Execução no GitHub Actions",
-          "status": "não_verificado",
-          "evidencia": "O snapshot é anterior à publicação; consultar Checks do PR e a entrega final para o resultado remoto."
+          "status": "validado",
+          "evidencia": "Execução pull_request no Ubuntu concluída com success para o commit 9b1e08fc02922f0301b03973a4482dcbe2e3d836; 12 testes, validador e diff aprovados.",
+          "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39777854814"
         }
       ],
       "dependencias": [
@@ -533,7 +539,7 @@
     "cobertura": "Links, duas entradas, JSON, 19 módulos, relatórios, sete testes unitários e cinco testes de comando com cópias temporárias. Sem cobertura de execução comercial.",
     "estrutural": {
       "status": "validado",
-      "evidencia": "2026-10-22: 12 testes aprovados (7 unitários e 5 de comando/diff); validador aprovado sobre 24 Markdown, duas entradas e 19 módulos. Windows/Python 3.13.14; execução remota registrada separadamente após publicação.",
+      "evidencia": "12 testes locais aprovados; snapshot anterior com 24 Markdown e 19 módulos aprovado também no GitHub Actions. Este fechamento adiciona um registro histórico (25 Markdown), submetido à mesma validação.",
       "comandos": [
         "python -m unittest discover -s tests -v",
         "python scripts/validar_governanca.py",
@@ -544,6 +550,13 @@
     "integracao_kommo": {
       "status": "não_verificado",
       "evidencia": "Não executada; tarefa não requer conta CRM."
+    },
+    "ci_remota": {
+      "status": "validado",
+      "commit_verificado": "9b1e08fc02922f0301b03973a4482dcbe2e3d836",
+      "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39777854814",
+      "resultado": "success",
+      "escopo": "12 testes, validador estrutural e diff do PR no runner Ubuntu; sem CRM."
     }
   },
   "dependencias_externas": [
@@ -574,8 +587,8 @@
     },
     {
       "id": "github-actions",
-      "status": "não_verificado",
-      "descricao": "Runner hospedado, disponibilidade de Actions e políticas de execução de PRs/forks. Execução remota só pode ser comprovada após publicação."
+      "status": "validado",
+      "descricao": "Disponibilidade comprovada pela execução 39777854814 no PR #3; futuras execuções ainda dependem de runners e políticas do GitHub."
     }
   ],
   "limitacoes_conhecidas": [
@@ -584,7 +597,7 @@
     "Playbooks são orientações documentais; integridade não valida comportamento de agentes ou efeitos em contas.",
     "Validador reconhece links Markdown explícitos simples e âncoras de títulos ATX; não é parser Markdown completo nem scanner de segredos.",
     "Insumos locais não rastreados, .agents/skills/codex-cost-reducer/ surgida durante a execução e PNGs ignorados não integram o inventário distribuído.",
-    "PR de CI depende do PR #2; main permanece preservada. Resultado remoto será fornecido após publicação, sem hash autorreferente no snapshot."
+    "PR de CI depende do PR #2; main preservada. Validação remota observada no commit 9b1e08fc02922f0301b03973a4482dcbe2e3d836; não representa garantia de futuras execuções."
   ],
   "proximas_evolucoes": [
     {
