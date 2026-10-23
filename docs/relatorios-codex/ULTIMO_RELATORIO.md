@@ -1,141 +1,151 @@
-Histórico: [Tarefa 001](historico/2026-10-22-governanca-continuidade.md).
+Histórico: [Tarefa 002 — complementos de validação contínua](historico/2026-10-22-ci-validacao-complementos.md).
 
-# Tarefa 001 — Governança permanente e continuidade
+# Tarefa 002 — Complementos de validação contínua
 
 ## 1. Identificação da execução, branch e objetivo
 
-- Execução: TAREFA-001, em 2026-10-22, fuso America/Sao_Paulo (UTC−03:00).
-- Repositório: `giuliacarv/cerebro_comercial_skill`.
-- Branch: `feat/governanca-relatorios-codex`; destino do PR: `main`.
-- Revisão base inspecionada: `fe5fcc24da527a3edda57bba65d4813665654339` (`origin/main`).
-- Objetivo: estabelecer governança persistente, relatórios rastreáveis e inventário confiável.
-- Escopo: documentação e verificação estrutural local; nenhuma funcionalidade comercial nova.
-
-O hash da implementação e a URL do PR são fornecidos na entrega após o commit.
-Este arquivo registra a revisão base, sem tentar incluir o hash de seu próprio commit.
+Execução: TAREFA-002-COMPLEMENTOS, em 2026-10-22, America/Sao_Paulo (UTC−03:00).
+Branch: `feat/ci-validacao-governanca`. Objetivo: fechar lacunas da automação de qualidade
+reaproveitando a CI e o validador da Tarefa 002, sem implementar capacidades comerciais.
+Base remota inspecionada: `fe5fcc24da527a3edda57bba65d4813665654339` (`origin/main`).
+Dependência explícita: `cd711dfa015c8d6537d06cb6ee60e41a399fc00e`, branch do PR #3,
+que já contém a Tarefa 001 e a primeira versão da CI. Os PRs #2 e #3 continuam abertos;
+nenhum merge foi feito na `main`. Esta branch deriva de `feat/ci-governanca` e o novo PR
+será direcionado a essa base para manter a diferença incremental.
 
 ## 2. Diagnóstico inicial do repositório
 
-`git fetch origin --prune` atualizou `origin/main` de `a1aa5f2` para `fe5fcc2`.
-A `main` local estava cinco commits atrás e foi sincronizada por fast-forward.
-A branch inicial era `codex/kommo-native-ai-salesbot-map-20261020`, em `253c876`;
-seu trabalho já estava incorporado no merge de PR #1 da `main` remota.
-Não havia alterações em arquivos rastreados nem `AGENTS.md` aplicável encontrado
-na raiz, nos ancestrais consultados ou na árvore rastreada.
-Havia uma pasta `Insumos para Kommo/` com 12 arquivos não rastreados: preservados e excluídos da publicação.
+O `fetch` confirmou `origin/main` em `fe5fcc2` e as branches remotas de governança e CI.
+O PR #2 (governança) e o PR #3 (CI) estavam abertos, não integrados à `main`. O Actions
+registrava sucesso no commit `cd711dfa015c8d6537d06cb6ee60e41a399fc00e` para a configuração
+anterior. A main permaneceu intacta.
 
-A árvore remota tinha 22 arquivos rastreados: `.gitignore`, quatro documentos de raiz,
-um mapa de interface, dois `SKILL.md`, um `agents/openai.yaml` e 13 referências.
-Foram lidos integralmente README, ARCHITECTURE, SOURCE_REGISTER, LICENSE, as entradas,
-o YAML, `.gitignore`, o mapa e todas as referências. O histórico recente inclui IA nativa,
-playbooks Salesbot e roteamento seletivo. Não havia scripts, testes, CI ou relatórios de
-continuidade versionados. Existiam governança de operações CRM em
-[automation-governance.md](../../skills/kommo-strategic-automation-architect/references/automation-governance.md),
-regras de autorização e leitura posterior em
-[proposal-and-approval.md](../../skills/kommo-strategic-automation-architect/references/proposal-and-approval.md),
-registro arquitetural e de fontes; isso ainda não estabelecia um protocolo de desenvolvimento.
+A inspeção encontrou duas entradas Agent Skills, 13 referências, configuração Codex, mapa
+documental, validador estrutural, testes e workflow `governanca.yml`. A arquitetura estratégica,
+a entrada especializada e a skill técnica externa `kommo-crm` estavam separadas como esperado.
+O workflow anterior já verificava testes, links, inventário, relatórios e whitespace em PRs,
+mas não tinha execução manual, escopo explícito para `main`, verificação de sintaxe Python ou
+scanner local de segredos. O validador já suportava espaços, percent-encoding, fragmentos,
+URLs externas sem rede e estados `não_verificado`; faltavam casos de teste para alguns desses
+contratos, JSON inválido, caminho de módulo ausente e identificadores de execução divergentes.
+Na revisão final, também foi fechada a lacuna de IDs de dependências do inventário: referências
+desconhecidas e dependências repetidas dentro do mesmo módulo agora reprovam a validação.
 
-A arquitetura corresponde à tarefa: camada estratégica, entrada especializada em IA compartilhando
-referência e handoff para `kommo-crm` externa. A árvore também contém um mapa documental da interface,
-configuração de apresentação do Codex e referências de Salesbot e roteamento.
-`ARCHITECTURE.md` descreve a decisão inicial de sete playbooks, enquanto a árvore evoluiu para 13
-referências e duas entradas; o documento permanece como registro da decisão inicial.
-Nenhuma divergência exigiu alterar os contratos das skills.
+As instruções, inventário e relatórios de continuidade foram consultados. `.agents/` e
+`Insumos para Kommo/` estavam não rastreados e foram preservados. O trabalho em andamento da
+evolução de roteamento foi isolado em stash e não foi incluído nesta branch.
 
-A API GitHub `GET /repos/giuliacarv/cerebro_comercial_skill`, consultada em 2026-10-22,
-retornou `visibility=public`, `private=false`, `default_branch=main`.
-O README ainda recomenda manter o repositório privado, e LICENSE contém termos proprietários
-e confidenciais. Há inconsistência de visibilidade documentada para decisão do proprietário;
-licença, visibilidade e instrução antiga foram preservadas conforme o escopo solicitado.
+A consulta à API de proteção da branch retornou HTTP 403 para a integração. A listagem pública
+de rulesets retornou lista vazia; isso não prova ausência de proteção via outro endpoint.
+Nenhuma regra administrativa foi alterada.
 
 ## 3. Arquivos criados, alterados e removidos
 
 Criados:
 
-- [AGENTS.md](../../AGENTS.md): instruções permanentes em PT-BR.
-- [Protocolo de relatórios](README.md): processo, estados e validações.
-- [ULTIMO_RELATORIO.md](ULTIMO_RELATORIO.md): cópia desta execução com links adaptados.
-- Este histórico: `docs/relatorios-codex/historico/2026-10-22-governanca-continuidade.md`.
-- [ESTADO_DA_SKILL.json](../estado/ESTADO_DA_SKILL.json): esquema 1.0.0 e 18 módulos inventariados.
-- [Validador](../../scripts/validar_governanca.py): verificações locais usando Python padrão.
-- [Testes do validador](../../tests/test_validar_governanca.py): sete casos, incluindo falhas deliberadas.
+- [Novo workflow para `main`](../../.github/workflows/validar-governanca.yml), com PR para `main`,
+  execução manual, validação Python e verificação de segredos evidentes.
+- [Validador do diff](../../scripts/validar_diff_pr.py), com AST e detecção limitada de segredos.
+- [Testes do validador de diff](../../tests/test_validar_diff_pr.py).
+- Este relatório histórico; o [último relatório](ULTIMO_RELATORIO.md) reproduz este conteúdo.
 
-Alterado: [README.md](../../README.md), exclusivamente com seção de protocolo e localização dos relatórios.
-Removidos: nenhum. Entradas, referências, YAML, mapa, registro de fontes, arquitetura e licença preservados.
+Alterados:
+
+- [Workflow existente](../../.github/workflows/governanca.yml), preservado para PRs entre
+  branches dependentes e filtrado para não duplicar a execução em PRs para `main`.
+- [Validador estrutural](../../scripts/validar_governanca.py), com diagnóstico de JSON,
+  tipos e caminhos, avisos informativos e comparação de identificadores de execução.
+- [Testes de governança](../../tests/test_validar_governanca.py) e [testes de CI](../../tests/test_ci_governanca.py).
+- [AGENTS.md](../../AGENTS.md), [README](../../README.md), [protocolo de relatórios](README.md),
+  [último relatório](ULTIMO_RELATORIO.md) e [inventário](../estado/ESTADO_DA_SKILL.json).
+
+Removidos: nenhum. Os dois `SKILL.md`, as referências, a licença, a arquitetura,
+as fontes e os históricos anteriores foram preservados. `kommo-crm` não foi copiada nem alterada.
 
 ## 4. Funcionalidades efetivamente implementadas
 
-Protocolo persistente de inspeção, desenvolvimento modular, branches, commits em PT-BR e revisão por PR.
-Relatório histórico preservado, cópia da execução mais recente e contrato para futuras entregas ao ChatGPT.
-Inventário com responsabilidade, status, evidência e testes por módulo; dependências, limitações e três evoluções.
-Validador local para links explícitos e âncoras, legibilidade das entradas, sintaxe e coerência do inventário,
-dez seções obrigatórias e equivalência entre último relatório e histórico. Testes detectam alvos e âncoras
-ausentes, fuga da raiz, inventário incompleto, estado inválido e divergência entre relatórios.
+O novo workflow executa em Pull Requests com destino `main` e permite `workflow_dispatch`.
+O workflow anterior permanece para PRs entre branches dependentes, sem disparar em PRs para `main`.
+Mantém Ubuntu 24.04, Python 3.13, actions oficiais fixadas por SHA, permissão `contents: read`,
+timeout de dez minutos, checkout sem credencial persistente e sem `pull_request_target`.
+Executa `unittest`, validação de sintaxe Python em memória, verificação de padrões evidentes
+de segredo em linhas adicionadas, validador estrutural e `git diff --check` contra a base.
 
-A geração dos relatórios e a aplicação do protocolo são responsabilidades do agente em cada tarefa.
-Não há automação de geração, proteção da `main`, execução CRM nem instalação global feita nesta entrega.
+O scanner não mostra valores, reconhece alguns formatos conhecidos e atribuições sensíveis,
+ignora placeholders explícitos e não grava bytecode. O validador estrutural agora informa
+arquivo/linha/coluna para JSON inválido, confere tipos dos campos do inventário e compara IDs
+de execução disponíveis entre relatório histórico e último relatório. Confere referências de
+dependências do módulo contra IDs existentes e acusa dependências duplicadas. Dependências externas
+`não_verificado` permanecem aceitas e geram apenas aviso informativo.
 
-## 5. Decisões arquiteturais e justificativas
+Foram ampliados testes para links com espaços e codificação, URLs externas sem acesso de rede,
+ausência de módulos/caminhos, JSON inválido, divergência de identificadores, estado Kommo
+`não_verificado`, sintaxe Python e detecção de segredo sem exposição do valor.
+Um teste adicional comprova falha para dependência com ID inexistente.
 
-- Manter regras essenciais em AGENTS e detalhes no protocolo vinculado reduz duplicação e custo de leitura.
-- Manter a governança fora de `skills/` preserva os dois pontos de entrada e o carregamento seletivo.
-- Inventariar separadamente as 13 referências evidencia o escopo e evita transformar a arquitetura em monólito.
-- Classificar os playbooks como `documentado` evita converter existência de texto em validação operacional.
-  O YAML e os mecanismos de governança são `implementado`; execução no runtime permanece não verificada.
-- Separar status da implementação de status de testes permite registrar integridade sem exagerar capacidades.
-- Histórico e cópia integral permitem leitura independente; o validador detecta divergências entre os dois.
-- Scripts com biblioteca padrão e unittest permitem repetir as checagens sem instalar pacotes ou acessar CRM.
+## 5. Decisões técnicas e justificativas
+
+- Reutilizar `validar_governanca.py` e sua suíte reduz duplicação da lógica existente.
+- A branch filha e o PR para `feat/ci-governanca` deixam visível somente o complemento e preservam
+  a cadeia de dependência com os PRs #2 e #3, sem diff enganoso contra a `main` ainda não atualizada.
+- `workflow_dispatch` usa `origin/main` como referência quando não há evento de PR; PRs para main
+  usam o SHA fornecido pelo evento.
+- `ast.parse` verifica sintaxe sem criar arquivos `.pyc` no checkout.
+- O scanner próprio é deliberadamente restrito ao diff e a padrões evidentes; não foi apresentado
+  como garantia de ausência de segredos nem como substituto de revisão.
+- Não houve mudança nas skills comerciais ou operações Kommo. Sem autorização e acesso administrativo
+  confirmado, regras da branch não foram modificadas.
 
 ## 6. Testes realizados e resultados observados
 
-Ambiente: Windows, PowerShell, Git e Python 3.13.14; sem conta CRM.
-As verificações abaixo passaram; a integridade foi reexecutada sobre os artefatos finais antes do commit.
+Ambiente local: Windows, PowerShell, Git e Python 3.13.14 do runtime Codex; somente biblioteca padrão.
+Comandos executados contra a revisão base e o resultado observado:
 
-| Verificação | Procedimento e resultado |
+| Verificação | Resultado |
 | --- | --- |
-| Testes mínimos do validador | `python -m unittest discover -s tests -v`: 7 testes, todos OK, incluindo casos negativos. |
-| Links, entradas, JSON, inventário e relatórios | `python scripts/validar_governanca.py`: saída zero; 23 arquivos Markdown, 2 entradas, 18 módulos, JSON válido, dez seções e cópia histórica íntegra. Todos os destinos e âncoras locais reconhecidos existem. |
-| Preservação da arquitetura | Comparação por `git show` da base com os arquivos locais: 21 arquivos preexistentes idênticos, normalizando CRLF. `git diff origin/main -- skills ARCHITECTURE.md SOURCE_REGISTER.md LICENSE` vazio; README só recebe a seção do protocolo. |
-| Segredos e dados pessoais | Revisão do conteúdo e varredura local dos 7 arquivos novos por credenciais, JWT, chaves privadas, atribuições de segredos, e-mails, CPF e telefone: nenhuma ocorrência. Revisão do trecho acrescentado ao README sem dados reais; insumos não rastreados excluídos. A varredura não garante detectar todo tipo de segredo. |
-| Diff | `git diff --check` e `git diff --cached --check`: saída zero, sem erros de whitespace. Caminhos adicionados explicitamente ao índice. |
+| `python -m unittest discover -s tests -v` | 27 testes aprovados; inclui casos positivos e negativos em cópias temporárias. |
+| `python scripts/validar_governanca.py` | Saída zero: 26 Markdown, 2 entradas e 20 módulos; JSON, inventário, links e relatório íntegros. Três avisos informativos de dependências `não_verificado`. |
+| `python scripts/validar_diff_pr.py origin/main` | Saída zero: sintaxe Python alterada válida e nenhum segredo evidente no diff adicionado; valores não são exibidos. |
+| `git diff --check origin/main` | Saída zero; sem erros de whitespace no diff. |
+| GitHub Actions para branch dependente | Aprovado no [run 39782340769](https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39782340769), no commit inicial `4a0e041e6dcbad290ef1c6766bee86335f74ed22`; testes, validação estrutural e whitespace concluíram com sucesso em `.github/workflows/governanca.yml`. |
+| Novo workflow para PRs destinados à `main` | Não verificado; o run do PR #4 foi o workflow de branches dependentes e não executou a nova configuração `validar-governanca.yml` nem o scanner de diff. |
 | Integração Kommo | Não executada; `não_verificado`. |
 
 ## 7. Estado atual das capacidades da skill
 
-[Inventário detalhado](../estado/ESTADO_DA_SKILL.json): 18 módulos,
-com duas entradas, 13 referências, YAML, mapa documental e governança.
-Roteamento, descoberta, RevOps, operações de vendas, ciclo do cliente, workflows, IA e Salesbot
-estão documentados como métodos. Não há conector técnico Kommo distribuído neste repositório.
-Não foi comprovada execução desses métodos no runtime nem configuração operacional de conta.
-A integridade estrutural local está `validado` no inventário, com escopo e evidências separados do status comercial.
-As definições de todos os estados estão no [protocolo](README.md).
+O inventário preserva as duas entradas, 13 referências e o mapa documental e acrescenta o
+módulo de validação de diff. As capacidades comerciais continuam documentadas, sem alteração
+ou promoção de status baseada na existência de arquivos. A CI e o scanner são mecanismos de
+governança; seus testes estruturais não validam o runtime de Agent Skills ou operações reais.
+Consulte o [inventário estruturado](../estado/ESTADO_DA_SKILL.json) para evidências, dependências
+e estados atualizados.
 
 ## 8. Riscos, limitações e débitos técnicos
 
-- Repositório público e recomendação antiga de privacidade precisam de decisão do proprietário.
-- CI e proteção de branches não foram configuradas; o cumprimento das regras depende do responsável pela tarefa.
-- Dois relatórios com o mesmo conteúdo requerem atualização coordenada; equivalência é verificada localmente.
-- O validador suporta links Markdown explícitos simples e títulos ATX; não é parser completo, scanner
-  de segredos, verificador de licenças ou validador operacional de Agent Skills.
-- Fontes oficiais e disponibilidade de recursos Kommo não foram revalidadas nesta tarefa.
-- Nenhum percentual de cobertura de comportamento comercial é conhecido; sete testes cobrem o validador.
-- A distribuição de apenas `skills/` não leva consigo a governança da raiz.
+- O scanner de segredos cobre padrões selecionados em linhas adicionadas, pode ter falsos positivos
+  e não garante detecção completa; arquivos fora do diff não são examinados.
+- O GitHub Actions aprovou o workflow de branches dependentes no PR #4, mas isso não executou
+  `validar-governanca.yml` destinado à `main` nem o scanner de diff. A nova configuração continua
+  `não_verificado` até haver execução em PR para main ou despacho manual observável.
+- A leitura da proteção da `main` não foi autorizada para a integração. Regras obrigatórias continuam
+  dependendo de decisão e configuração administrativa.
+- Sem regra exigindo o status check, uma execução vermelha não bloqueia tecnicamente o merge.
+- O validador Markdown é intencionalmente simples e não valida todos os dialetos ou comportamento.
+- O repositório público ainda tem recomendação histórica de privacidade e termos proprietários;
+  essa inconsistência permanece sem alteração de licença ou distribuição.
 
 ## 9. Pendências e dependências externas
 
-Revisão e aprovação do PR pelo responsável; merge não executado automaticamente.
-Decisão sobre consistência entre visibilidade e orientação de distribuição, sem alteração nesta tarefa.
-Para futuras operações: verificar instalação da skill externa `kommo-crm`, ferramentas disponíveis,
-identidade da conta, permissões, plano, canal, fontes e autorização para o efeito específico.
-Python 3 e Git são necessários para as verificações locais documentadas.
-Insumos locais e capturas ignoradas continuam fora do pacote publicado.
-Durante a execução surgiu também `.agents/skills/codex-cost-reducer/`, não rastreado;
-foi preservado e excluído do índice, sem incorporá-lo à arquitetura ou à publicação.
+Revisar este complemento no PR filho da `feat/ci-governanca`; depois da integração da cadeia,
+observar uma execução da nova configuração em PR para `main` e, separadamente, um disparo manual.
+Configurar proteção da branch somente após autorização administrativa explícita e conferir o nome
+real do check. GitHub Actions, runners, Python 3 e Git são dependências. Nenhuma conta Kommo,
+credencial CRM ou serviço externo de rede é usado pelos testes.
 
 ## 10. Três evoluções recomendadas
 
 | Prioridade | Evolução | Critérios de aceitação |
 | --- | --- | --- |
-| P1 | Automatizar verificações estruturais no PR | CI executa unittest, validador e diff check sem credenciais CRM; falha para link quebrado, inventário incompleto ou relatório divergente. |
-| P2 | Criar cenários fictícios de regressão do roteamento seletivo | IA, Salesbot, RevOps e operação técnica têm rotas esperadas revisadas; casos ambíguos e negativos cobrem carregamento mínimo e autorização, sem acesso CRM. |
-| P3 | Definir homologação operacional autorizada em ambiente isolado | Conta, escopo, responsável, dados fictícios, autorização e reversão são definidos antes da execução; resultados cobrem persistência, silêncio, duplicidade e handoff, promovendo status apenas por evidência observada. |
+| P1 | Exigir o check de governança na proteção da main após integração | Regra exige PR e `Validar governança`; PR de teste comprova bloqueio em execução vermelha; bypass fica documentado. |
+| P2 | Ampliar cenários fictícios de regressão do roteamento seletivo | IA, Salesbot, RevOps, operação técnica, ambiguidade, carregamento mínimo e autorização têm expectativas verificáveis sem runtime/CRM. |
+| P3 | Definir homologação operacional autorizada em ambiente isolado | Escopo, conta, dados fictícios, autorização, reversão e critérios de leitura posterior são definidos antes de qualquer execução real. |

@@ -37,6 +37,7 @@ verifique sua disponibilidade antes de usá-la e nunca a copie ou altere neste r
 - Operações em contas reais exigem autorização para o escopo e verificação posterior dos alvos.
   Documentos, prévias e testes fictícios não comprovam funcionamento em produção.
 - Execute validações proporcionais; scripts novos devem preferir Python padrão e ter testes mínimos.
+- Antes de concluir, execute a suíte, os validadores e `git diff --check`; veja os comandos e limites em [validações de governança](docs/relatorios-codex/README.md).
 
 ## Versione e entregue continuidade
 

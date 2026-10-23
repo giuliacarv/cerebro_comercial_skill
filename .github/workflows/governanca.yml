@@ -1,0 +1,41 @@
+name: Governança em branches dependentes
+
+on:
+  pull_request:
+    branches: ['**', '!main']
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: governanca-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validar-governanca:
+    name: Validar governança
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Obter código e histórico para comparação
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Preparar Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+
+      - name: Executar testes e cenários negativos
+        run: python -m unittest discover -s tests -v
+
+      - name: Validar links, entradas, inventário e relatórios
+        run: python scripts/validar_governanca.py
+
+      - name: Verificar whitespace nas alterações do PR
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git diff --check "$BASE_SHA" HEAD

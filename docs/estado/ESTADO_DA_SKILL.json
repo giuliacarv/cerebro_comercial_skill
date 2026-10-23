@@ -1,8 +1,8 @@
 {
   "versao_esquema": "1.0.0",
-  "atualizado_em": "2026-10-22T08:52:27-03:00",
+  "atualizado_em": "2026-10-22T09:55:59-03:00",
   "revisao_base": "fe5fcc24da527a3edda57bba65d4813665654339",
-  "escopo_revisao": "origin/main sincronizada; os artefatos novos são identificados pela branch e pelo commit publicado na entrega, não por hash autorreferente.",
+  "escopo_revisao": "origin/main sincronizada; branch derivada de origin/feat/ci-governanca no commit cd711dfa015c8d6537d06cb6ee60e41a399fc00e (PR #3), dependente do PR #2 ainda aberto.",
   "definicoes_status": "docs/relatorios-codex/README.md",
   "modulos": [
     {
@@ -493,24 +493,125 @@
         "python3-para-validacao",
         "git"
       ]
+    },
+    {
+      "id": "ci-governanca",
+      "caminho": ".github/workflows/validar-governanca.yml",
+      "responsabilidade": "Executar testes, validação estrutural e verificação do diff em Pull Requests.",
+      "status_implementacao": "implementado",
+      "evidencias": [
+        {
+          "caminho": ".github/workflows/validar-governanca.yml",
+          "observacao": "Workflow com pull_request para main, workflow_dispatch, permissões somente leitura, timeout e actions oficiais fixadas por SHA; a versão revisada ainda aguarda execução remota."
+        },
+        {
+          "caminho": ".github/workflows/governanca.yml",
+          "observacao": "Workflow anterior preservado para PRs entre branches dependentes; filtro exclui main para não duplicar o workflow principal."
+        },
+        {
+          "caminho": "tests/test_ci_governanca.py",
+          "observacao": "Cenários do validador em cópias temporárias e teste estático de política do workflow."
+        },
+        {
+          "caminho": "docs/relatorios-codex/historico/2026-10-22-ci-validacao-complementos.md",
+          "observacao": "Registro da evolução e de sua evidência local; execução remota da nova configuração permanece não_verificado."
+        },
+        {
+          "caminho": "docs/relatorios-codex/historico/2026-10-22-ci-governanca-validacao.md",
+          "observacao": "Evidência de execução anterior aprovada para a configuração anterior do workflow.",
+          "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39777854814"
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Testes locais, validação estrutural, sintaxe Python, scanner de segredos e contrato do workflow revisado",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: 27 testes e validador estrutural aprovados; validação local e teste estático do contrato. Isso não prova execução do novo workflow no GitHub Actions."
+        },
+        {
+          "escopo": "Execução no GitHub Actions da configuração revisada",
+          "status": "não_verificado",
+          "evidencia": "O novo workflow para PRs destinados à main não foi executado remotamente. O run 39782340769 foi para branches dependentes e não executou o scanner do diff.",
+          "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39782340769"
+        },
+        {
+          "escopo": "Workflow de branches dependentes em PR",
+          "status": "validado",
+          "evidencia": "Run 39782340769 no GitHub Actions para o PR #4, commit 4a0e041e6dcbad290ef1c6766bee86335f74ed22; testes, validação estrutural e whitespace concluíram com sucesso.",
+          "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39782340769"
+        },
+        {
+          "escopo": "Operação Kommo",
+          "status": "não_verificado",
+          "evidencia": "Não aplicável à tarefa e não executada."
+        }
+      ],
+      "dependencias": [
+        "github-actions",
+        "python3-para-validacao",
+        "git"
+      ]
+    },
+    {
+      "id": "validacao-diff-pr",
+      "caminho": "scripts/validar_diff_pr.py",
+      "responsabilidade": "Validar sintaxe Python alterada e procurar padrões evidentes de segredo somente nas linhas adicionadas ao diff.",
+      "status_implementacao": "implementado",
+      "evidencias": [
+        {
+          "caminho": "scripts/validar_diff_pr.py",
+          "observacao": "Implementação com biblioteca padrão; não grava bytecode e não imprime valores sinalizados."
+        },
+        {
+          "caminho": "tests/test_validar_diff_pr.py",
+          "observacao": "Testes mínimos de sintaxe, placeholders, detecção sem valor e referência base inválida."
+        },
+        {
+          "caminho": "docs/relatorios-codex/historico/2026-10-22-ci-validacao-complementos.md",
+          "observacao": "Relatório documenta escopo e limitações do scanner."
+        }
+      ],
+      "testes": [
+        {
+          "escopo": "Casos locais sintéticos para sintaxe e detecção de segredos",
+          "status": "validado",
+          "evidencia": "2026-10-22, Windows/Python 3.13.14: testes sintéticos aprovados; python scripts/validar_diff_pr.py origin/main retornou zero e nenhuma evidência foi impressa."
+        },
+        {
+          "escopo": "Cobertura de todos os formatos de segredo possíveis",
+          "status": "não_verificado",
+          "evidencia": "Scanner cobre padrões comuns selecionados e não substitui ferramentas especializadas ou revisão humana."
+        }
+      ],
+      "dependencias": [
+        "python3-para-validacao",
+        "git"
+      ]
     }
   ],
   "testes": {
-    "ambiente": "Windows / Python 3.13.14 / biblioteca padrão / sem acesso ao CRM",
-    "cobertura": "Caminhos dos dois SKILL.md, 13 referências, YAML e mapa; links Markdown, inventário, relatório e testes do validador. Sem cobertura percentual de execução comercial.",
+    "ambiente": "Windows / Python 3.13.14 do runtime Codex / biblioteca padrão; workflow configurado para Ubuntu 24.04 e Python 3.13; sem CRM.",
+    "cobertura": "27 testes locais de governança e diff; validação de links, âncoras, espaços/percent-encoding, duas entradas, JSON, inventário e referências entre módulos/dependências, relatórios, sintaxe Python e padrões selecionados de segredos. Sem cobertura comercial ou execução CRM.",
     "estrutural": {
       "status": "validado",
-      "evidencia": "2026-10-22: python -m unittest discover -s tests -v (7 testes, OK); python scripts/validar_governanca.py (23 Markdown, 2 entradas, 18 módulos, JSON e relatórios íntegros).",
+      "evidencia": "2026-10-22, Windows/Python 3.13.14: 27 testes aprovados; scripts/validar_governanca.py informou 26 Markdown, 2 entradas e 20 módulos; links, JSON, inventário e relatórios íntegros. Três avisos informativos para dependências não_verificado.",
       "comandos": [
         "python -m unittest discover -s tests -v",
         "python scripts/validar_governanca.py",
-        "git diff --check"
+        "python scripts/validar_diff_pr.py origin/main",
+        "git diff --check origin/main"
       ],
       "limite": "Verificação estrutural local; não valida execução no runtime ou conta Kommo."
     },
     "integracao_kommo": {
       "status": "não_verificado",
-      "evidencia": "Não executada; tarefa não requer conta CRM."
+      "evidencia": "Nenhuma conta, credencial ou operação CRM foi utilizada; a tarefa é de governança."
+    },
+    "ci_remota": {
+      "status": "parcial",
+      "evidencia": "Run 39782340769 aprovou o workflow de branches dependentes no PR #4; a nova definição para PRs destinados à main e o scanner de diff ainda não têm execução remota observada.",
+      "url": "https://github.com/giuliacarv/cerebro_comercial_skill/actions/runs/39782340769",
+      "limite": "O run observado executou testes, validador estrutural e diff-check, mas não executou validar-governanca.yml nem validar_diff_pr.py."
     }
   },
   "dependencias_externas": [
@@ -538,38 +639,47 @@
       "id": "git",
       "status": "implementado",
       "descricao": "Git disponível, origin/main obtida por fetch e atualização fast-forward."
+    },
+    {
+      "id": "github-actions",
+      "status": "validado",
+      "descricao": "Disponibilidade comprovada pela execução 39777854814 no PR #3; futuras execuções ainda dependem de runners e políticas do GitHub."
     }
   ],
   "limitacoes_conhecidas": [
     "Repositório público em 2026-10-22, enquanto README recomenda privacidade e LICENSE contém termos proprietários; decisão do proprietário pendente.",
-    "Sem CI ou proteção de branch implantada por esta tarefa; governança depende de cumprimento das instruções.",
+    "Workflow entregue; regras de proteção de branch não foram alteradas. Tornar o check obrigatório requer configuração administrativa posterior.",
     "Playbooks são orientações documentais; integridade não valida comportamento de agentes ou efeitos em contas.",
     "Validador reconhece links Markdown explícitos simples e âncoras de títulos ATX; não é parser Markdown completo nem scanner de segredos.",
-    "Insumos locais não rastreados, .agents/skills/codex-cost-reducer/ surgida durante a execução e PNGs ignorados não integram o inventário distribuído."
+    "Insumos locais não rastreados, .agents/skills/codex-cost-reducer/ surgida durante a execução e PNGs ignorados não integram o inventário distribuído.",
+    "PR de CI depende do PR #2; main preservada. Validação remota observada no commit 9b1e08fc02922f0301b03973a4482dcbe2e3d836; não representa garantia de futuras execuções.",
+    "O scanner próprio é intencionalmente limitado a padrões conhecidos/atribuições sensíveis em linhas adicionadas; não garante detecção completa de segredos e não substitui revisão humana.",
+    "A versão revisada do workflow está em branch filha do PR #3; a nova execução no GitHub Actions permanece não_verificado até que a definição esteja disponível na base aplicável.",
+    "A leitura administrativa da proteção da main retornou HTTP 403 para a integração; nenhuma regra foi alterada. O endpoint público de rulesets retornou lista vazia."
   ],
   "proximas_evolucoes": [
     {
       "prioridade": "P1",
-      "evolucao": "Automatizar verificações estruturais no PR",
+      "evolucao": "Exigir o check de governança na proteção da main após a integração dos PRs",
       "criterios_aceitacao": [
-        "CI executa unittest, validador e diff check sem credenciais CRM.",
-        "PR com link quebrado, inventário incompleto ou relatório divergente falha."
+        "A regra exige o check Validar governança e PR para main, com autorização administrativa.",
+        "Um PR de teste demonstra que execução vermelha impede merge e a exceção de bypass fica documentada."
       ]
     },
     {
       "prioridade": "P2",
-      "evolucao": "Criar cenários fictícios de regressão do roteamento seletivo",
+      "evolucao": "Ampliar cenários fictícios de regressão do roteamento seletivo",
       "criterios_aceitacao": [
-        "Casos de IA, Salesbot, RevOps e operação técnica têm rota esperada e justificativa revisadas.",
-        "Casos ambíguos e negativos cobrem carregamento mínimo e autorização sem acesso ao CRM."
+        "Casos de IA, Salesbot, RevOps e operação técnica mantêm rotas mínimas documentadas.",
+        "Ambiguidade, dependência ausente e limite de autorização são cobertos sem runtime de modelo ou acesso CRM."
       ]
     },
     {
       "prioridade": "P3",
       "evolucao": "Definir homologação operacional autorizada em ambiente isolado",
       "criterios_aceitacao": [
-        "Conta, escopo, responsável, dados fictícios, autorização e reversão estão definidos antes da execução.",
-        "Critérios cobrem persistência de campos, silêncio, duplicidade e handoff; só resultados observados promovem status."
+        "Conta, escopo, responsável, dados fictícios, autorização e reversão são definidos antes de execução.",
+        "Persistência, silêncio, duplicidade e handoff só recebem validação após leitura dos efeitos observados."
       ]
     }
   ]
