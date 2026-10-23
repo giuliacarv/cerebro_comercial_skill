@@ -88,3 +88,7 @@ testes, decisões, limitações e próximos passos para o arquiteto ChatGPT.
 
 Os estados do inventário distinguem documentação, implementação e validação com escopo
 explícito. Validação estrutural local não comprova operação em uma conta Kommo real.
+
+Pull Requests para `main` executam as verificações de governança no GitHub Actions. A execução
+manual e os comandos locais estão descritos no [protocolo de validação](docs/relatorios-codex/README.md);
+o check só bloqueia o merge se for exigido nas regras de proteção da branch.

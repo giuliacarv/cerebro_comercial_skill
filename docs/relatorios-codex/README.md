@@ -71,14 +71,24 @@ Na raiz, com Python 3 disponível, execute:
 ```powershell
 python -m unittest discover -s tests -v
 python scripts/validar_governanca.py
-git diff --check
+python scripts/validar_diff_pr.py origin/main
+git diff --check origin/main
 ```
 
-O sucesso é saída zero nos três comandos. O validador usa apenas a biblioteca padrão:
-confere UTF-8, links Markdown locais explícitos e âncoras, entradas das skills, JSON,
-cobertura dos caminhos de módulos e equivalência entre histórico e último relatório.
-Ele não consulta URLs externas, não interpreta todo o dialeto Markdown nem chama o Kommo.
-Revise manualmente links não reconhecidos pelo formato simples e mudanças de comportamento.
+O sucesso é saída zero nos quatro comandos. Adicione arquivos novos ao índice ou use `git add -N`
+para que `git diff` os inclua na verificação local. O validador de diff recebe uma referência
+base, compila a sintaxe dos arquivos Python alterados em memória e verifica linhas adicionadas
+por padrões evidentes de segredo, sem exibir valores encontrados. Placeholders identificáveis
+como `YOUR_TOKEN_HERE` e valores com prefixos `example`, `sample`, `dummy` ou `fake` são ignorados.
+
+O validador estrutural usa apenas a biblioteca padrão: confere UTF-8, links Markdown locais
+explícitos e âncoras, entradas das skills, JSON, campos e caminhos do inventário e equivalência
+entre histórico e último relatório. Também confere IDs e referências de dependências do inventário.
+Caminhos com espaços podem usar `<...>`; `%20` e fragmentos
+codificados são decodificados antes da verificação. URLs HTTP/HTTPS não são consultadas.
+Diagnostique mensagens `ERRO` pelo arquivo e motivo; avisos de dependências `não_verificado`
+são informativos e não reprovam a execução. Links fora da sintaxe reconhecida e mudanças de
+comportamento continuam exigindo revisão humana. Nenhum comando acessa o Kommo.
 
 Antes do commit, revise somente os arquivos destinados à publicação, procurando credenciais,
 dados pessoais, referências de clientes e exemplos com dados reais. Varreduras por padrões
@@ -90,38 +100,58 @@ evite incluir insumos locais não rastreados com `git add .`.
 
 - [Tarefa 001 — governança e continuidade](historico/2026-10-22-governanca-continuidade.md).
 - [Tarefa 002 — verificações automáticas nos PRs](historico/2026-10-22-ci-governanca.md).
+- [Tarefa 002 — complementos e critérios adicionais](historico/2026-10-22-ci-validacao-complementos.md).
 - [Última execução](ULTIMO_RELATORIO.md).
 
 ## Verificações automáticas nos Pull Requests
 
-O workflow [governanca.yml](../../.github/workflows/governanca.yml) executa os testes,
-o validador e `git diff --check` sobre as alterações do PR em relação ao commit da branch
-de destino. Usar apenas `git diff --check` após checkout não detectaria whitespace já commitado.
+O workflow [validar-governanca.yml](../../.github/workflows/validar-governanca.yml) executa
+os testes, a validação de sintaxe Python/segredos, o validador estrutural e `git diff --check`.
+Em Pull Requests para `main`, usa o SHA da base do evento para examinar alterações commitadas;
+em execução manual (`workflow_dispatch`), compara com `origin/main`. Usar apenas `git diff --check`
+sem revisar a base não detectaria whitespace já commitado.
+O workflow anterior [governanca.yml](../../.github/workflows/governanca.yml) permanece para
+PRs entre branches dependentes e exclui `main`, evitando duplicar a verificação principal.
 O job exibido no PR chama-se **Validar governança**.
 
 Ele roda em abertura, atualização de commits, reabertura, liberação para revisão e edição
-do PR, incluindo troca de base. Não há filtros de caminho ou branch: PRs sobre branches
-dependentes também são verificados. Execuções antigas do mesmo PR são canceladas.
+de PRs com destino `main`, incluindo troca de base. Também pode ser iniciado manualmente na
+aba Actions. Execuções antigas do mesmo PR ou da mesma referência manual são canceladas.
 Conflitos de merge e políticas de aprovação de workflows de forks podem impedir a execução;
 nesses casos, confira o status do PR antes de interpretar ausência de resultado como sucesso.
 
 O ambiente é Ubuntu 24.04 com Python 3.13, sem pacotes Python adicionais. Actions oficiais
 de checkout e setup-python estão fixadas por hash completo e devem ser revisadas ao atualizar.
-A permissão do token automático é `contents: read`; ele não persiste no checkout.
-Nenhum segredo de repositório ou credencial Kommo é usado, nem há chamada ao CRM.
+A permissão do token automático é `contents: read`; ele não persiste no checkout. O workflow
+não usa `pull_request_target`, segredos, credenciais Kommo ou chamadas CRM. A verificação de
+segredos usa somente biblioteca padrão e procura padrões conhecidos/atribuições sensíveis em
+linhas adicionadas; não é um scanner completo, não detecta todos os formatos e requer revisão
+humana para falsos positivos e conteúdo fora do diff.
 
-Os testes de comando executam o validador real em repositórios temporários e comprovam
-falha para link quebrado, inventário incompleto e relatório divergente, além de whitespace
-em snapshots Git. Dados e alterações deliberadamente inválidos ficam apenas nos temporários.
+Os testes executam o validador real em repositórios temporários e comprovam aprovação estrutural,
+falha para links e módulos obrigatórios ausentes, JSON inválido, caminhos de inventário e
+identificadores divergentes, aceitação de dependência Kommo `não_verificado` e links externos
+sem acesso à rede. Também testam sintaxe Python e detecção sem exposição de valores. Whitespace
+é testado em snapshots Git. Dados e alterações deliberadamente inválidos ficam nos temporários.
 Os resultados e logs ficam na aba Checks do PR e no GitHub Actions.
 As cópias usam `git ls-files`: ao desenvolver com arquivos novos, adicione seus caminhos
 explicitamente ao índice antes de executar a suíte, para que também façam parte do cenário.
 
 Uma execução vermelha sinaliza reprovação. Impedir tecnicamente o merge exige configurar
 **Validar governança** como verificação obrigatória nas regras da branch; este workflow não
-altera essas regras. Antes de exigir o check, ele deve estar incorporado à branch de destino
-e ter uma execução observada. O PR da Tarefa 002 depende do PR de governança #2.
+altera essas regras. Após integrar o workflow em `main` e obter uma execução observada, em
+**Settings → Branches** crie/edite a regra da `main`, habilite a exigência de PR e de checks,
+e selecione o job **Validar governança** como status obrigatório. Em rulesets, aplique regra
+equivalente ao padrão `main`. Verifique o nome do check na aba Checks antes de salvar. A API
+consultada nesta execução não autorizou leitura da proteção da branch; nenhuma regra foi alterada.
+
+O diagnóstico de workflow inclui nome e evento do check. Falha do verificador de diff apresenta
+arquivo e linha, sem o valor sinalizado; erro de JSON indica linha e coluna; falha de link indica
+origem e destino. Confirme se a referência base existe e se novos arquivos foram adicionados
+ao índice. A validação não prova execução de Agent Skills, disponibilidade de `kommo-crm`,
+funcionamento comercial ou operação em conta real.
 
 Referências oficiais consultadas em 2026-10-22:
 [eventos pull_request](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request),
+[workflow_dispatch](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch),
 [checkout](https://github.com/actions/checkout) e [setup-python](https://github.com/actions/setup-python).
